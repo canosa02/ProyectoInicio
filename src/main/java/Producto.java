@@ -5,13 +5,13 @@ public class Producto{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private float precio;
+    private BigDecimal precio;
 
     public Producto() {
 
     }
 
-    public Producto(String nombre, float precio){
+    public Producto(String nombre, BigDecimal precio){
         this.nombre = nombre;
         this.precio = precio;
     }
@@ -32,11 +32,11 @@ public class Producto{
         this.nombre = nombre;
     }
 
-    public float getPrecio() {
+    public BigDecimal getPrecio() {
         return precio;
     }
 
-    public void getPrecio(float precio){
+    public void getPrecio(BigDecimal precio){
         this.precio = precio;
     }
 
