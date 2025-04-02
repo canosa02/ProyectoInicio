@@ -50,7 +50,7 @@ Funcionalidad que nos permita modificar los parámetros ya introducidos en la ba
     FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
     );
 
-### Ubicacion ###
+### Ubicación ###
     CREATE TABLE Ubicacion(
     id_ubicacion varchar(5) primary key,
     pais varchar(50) not null,
