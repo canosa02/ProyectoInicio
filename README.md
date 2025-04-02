@@ -28,7 +28,7 @@ Nos permite modificar las tiendas que tengamos en la base de datos
 #### Filtrar tiendas
 Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y dirección
 
-### Ubicacion ###
+### Ubicación ###
 #### Alta de ubicaciones
 Funcionalidad que nos permita añadir nuevas ubicaciones
 
