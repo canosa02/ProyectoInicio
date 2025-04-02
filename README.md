@@ -28,58 +28,68 @@ Nos permite modificar las tiendas que tengamos en la base de datos
 #### Filtrar tiendas
 Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y ubicación
 
-## Estructura BD ##
-
-### Tienda ###
-
-    CREATE TABLE Tienda(
-    id int auto_increment primary key,
-    id_ubicacion varchar(5) not null,
-    id_producto int auto_increment,
-    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE
-    FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
-    );
-
-### Ubicación ###
-    CREATE TABLE Ubicacion(
-    id_ubicacion varchar(5) primary key,
-    pais varchar(50) not null,
-    ciudad varchar(50) not null;
-    direccion varchar(50) not null,
-    );
-
-### Producto ###
-    CREATE TABLE Productos(
-    id_producto int auto_increment primary key,
-    nombre varchar(30) not null
-    );
-
-### PrecioProducto ###
-    CREATE TABLE PrecioProducto(
-    id_producto int auto_increment primary key,
-    id_ubicacion varchar(5) primary key,
-    precio DECIMAL(10, 2),
-    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE
-    FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
-    )
 
 
 ## ENDPOINTS ##
 
 ### Productos ###
 **GET `/products/{id}` -Obtener datos del producto (id, nombre, tiendas en donde está y su precio respectivamente)** <br>
+
+**Ejemplo JSON respuesta**
+```json
+{
+    "id": "2",
+    "nombre": "Agua",
+    {
+        "tienda" : 1,
+        "precio: "10.5"
+    }
+    {
+        "tienda" : 2,
+        "precio: "9.5"
+    }
+}
+```
 **POST `/products` -Añadir un producto** <br>
 **DELETE `/products/{id}` -Dar de baja un producto** <br>
 **PUT/PATCH `/products/{id}` -Modificar información del producto** <br>
 **GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
 
+
 ### **Tienda** ###
-**GET `/shop` -Obtener de la tienda  (id, ubicación, cantidad productos )** <br>
+**GET `/shop` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
+```json
+{
+    "id": "4",
+    "id_ubicacion": "1",
+    "país": "España",
+    "ciudad": "Coruña",
+    "direccion": "Av. Finisterre",
+    "Número de productos": "30"
+}
+```
 **POST `/shop` -Añadir una tienda** <br> 
 **DELETE `/shop` -Dar de baja una tienda** <br> 
 **PUT/PATCH `/shop` -Modificar tienda** <br>
 **GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
-
+```json
+{
+    "id": "4",
+    "id_ubicacion": "1",
+    "país": "España",
+    "ciudad": "Coruña",
+    "direccion": "Av. Finisterre",
+    "Número de productos": "30"
+}
+{
+    "id": "6",
+    "id_ubicacion": "1",
+    "país": "España",
+    "ciudad": "Santiago",
+    "direccion": "Av Orense",
+    "Número de productos": "20"
+}
+```
 
 
 
