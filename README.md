@@ -74,5 +74,30 @@ Funcionalidad que nos permita modificar los parámetros ya introducidos en la ba
     )
 
 
+## ENDPOINTS ##
+
+### Productos ###
+**-Obtener datos  del  producto (id, nombre, tiendas en donde está y su precio respectivamente)** <br>
+**-Añadir un producto** <br>
+**-Dar de baja un producto** <br>
+**-Modificar información del producto** <br>
+**-Listado ( se puede aplicar filtros )** <br>
+
+## **Tienda:** ##
+**-Obtener de la tienda  (id, ubicación, cantidad productos )** <br>
+**-Añadir una tienda** <br> 
+**-Dar de baja una tienda** <br> 
+**-Modificar tienda** <br>
+**-Listado ( se puede aplicar filtros )** <br>
+
+
+
+
+
+
+
+
+
+
 
 
