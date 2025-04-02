@@ -57,7 +57,7 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 Json entrada
 ```json
 {
-    "nombre": "Pizza con piña",
+    "nombre": "Pizza con piña"
 }
 ```
 
@@ -66,7 +66,7 @@ Json Respuesta
 ```json
 {
     "id": "10",
-    "nombre": "Pizza con piña",
+    "nombre": "Pizza con piña"
 }
 ```
 **DELETE `/products/{id}` -Dar de baja un producto** <br>
@@ -124,7 +124,7 @@ Json entrada
 {
     "id_producto": "10",
     "id_ubicacion": "2",
-    "precio": "10",
+    "precio": "10"
 }
 ```
 
