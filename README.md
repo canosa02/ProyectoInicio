@@ -40,13 +40,13 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 {
     "id": "2",
     "nombre": "Agua",
-    {
-        "tienda" : 1,
-        "precio: "10.5"
-    }
-    {
-        "tienda" : 2,
-        "precio: "9.5"
+    "tienda":{
+        "id" : 1,
+        "precio": 10.5
+    },
+    "tienda":{
+        "id" : 2,
+        "precio": 9.5
     }
 }
 ```
@@ -55,30 +55,33 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 **PUT/PATCH `/products/{id}` -Modificar información del producto** <br>
 **GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
 ```json
-{
-    "id": "2",
-    "nombre": "Agua",
+[
+      {
+        "id": "2",
+        "nombre": "Agua",
+        "tienda": {
+          "id": 1,
+          "precio": 10.5
+        },
+        "tienda": {
+          "id": 2,
+          "precio": 9.5
+        }
+      },
+    
     {
-        "tienda" : 1,
-        "precio: "10.5"
+        "id": "4",
+        "nombre": "Agua con gas",
+        "tienda":{
+            "id" : 1,
+            "precio": 14
+        },
+        "tienda":{
+            "id" : 5,
+            "precio": 11
+        }
     }
-    {
-        "tienda" : 2,
-        "precio: "9.5"
-    }
-
-{
-    "id": "4",
-    "nombre": "Agua con gas",
-    {
-        "tienda" : 1,
-        "precio: "14"
-    }
-    {
-        "tienda" : 5,
-        "precio: "11"
-    }
-}
+]
 ```
 
 ### **Tienda** ###
@@ -98,22 +101,25 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 **PUT/PATCH `/shop` -Modificar tienda** <br>
 **GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
 ```json
-{
-    "id": "4",
-    "id_ubicacion": "1",
-    "país": "España",
-    "ciudad": "Coruña",
-    "direccion": "Av. Finisterre",
-    "Número de productos": "30"
-}
-{
-    "id": "6",
-    "id_ubicacion": "1",
-    "país": "España",
-    "ciudad": "Santiago",
-    "direccion": "Av Orense",
-    "Número de productos": "20"
-}
+[
+    {
+        "id": "4",
+        "id_ubicacion": "1",
+        "país": "España",
+        "ciudad": "Coruña",
+        "direccion": "Av. Finisterre",
+        "Número de productos": "30"
+    },
+    
+    {
+        "id": "6",
+        "id_ubicacion": "1",
+        "país": "España",
+        "ciudad": "Santiago",
+        "direccion": "Av Orense",
+        "Número de productos": "20"
+    }
+]
 ```
 
 
