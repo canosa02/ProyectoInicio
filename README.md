@@ -1,5 +1,5 @@
 # Proyecto #
-
+Haremos un proyecto sobre una cadena de tiendas, las cuales pueden estar situadas en diferentes ubicaciones alrededor del mundo, las tiendas tendrán productos que cambiarán su precio dependiendo de la zona.
 ## Funcionalidades ##
 A continuación explicaremos las funcionalidades de la aplicación
 ### Productos ###
@@ -12,6 +12,9 @@ Funcionalidad que nos permita quitar productos de la base de datos
 #### Modificación de productos
 Funcionalidad que nos permita modificar valores de los diferentes productos.
 
+#### Filtrar productos
+Esta parte del programa nos permitirá hacer una búsqueda de los productos que queremos según su nombre y precio
+
 ### Tienda ###
 #### Alta Tienda
 Funcionalidad que nos permita añadir tiendas
@@ -21,6 +24,9 @@ Funcionalidad que nos permita dar de baja una tienda
 
 #### Modificación de tiendas
 Nos permite modificar las tiendas que tengamos en la base de datos
+
+#### Filtrar tiendas
+Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y dirección
 
 ### Ubicacion ###
 #### Alta de ubicaciones
