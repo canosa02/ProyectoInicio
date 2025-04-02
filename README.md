@@ -25,6 +25,9 @@ Funcionalidad que nos permita dar de baja una tienda
 #### Modificación de tiendas
 Nos permite modificar las tiendas que tengamos en la base de datos
 
+#### Añadir producto a la tienda
+Nos permite añadir el producto deseado a  la tienda que queramos
+
 #### Filtrar tiendas
 Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y ubicación
 
@@ -51,8 +54,26 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 }
 ```
 **POST `/products` -Añadir un producto** <br>
+Json entrada
+```json
+{
+    "nombre": "Pizza con piña",
+}
+```
+
+Json Respuesta
+
+```json
+{
+    "id": "10",
+    "nombre": "Pizza con piña",
+}
+```
 **DELETE `/products/{id}` -Dar de baja un producto** <br>
 **PUT/PATCH `/products/{id}` -Modificar información del producto** <br>
+**PUT/PATCH `/products/{id}/shop/{idTienda}/precio` -Modificar información del producto en la tienda** <br>
+" DUDA " **PUT/PATCH `/shop/{idS}/products/{idP}/precio` -Modificar información del producto en la tienda** <br>
+
 **GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
 ```json
 [
@@ -97,6 +118,16 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 }
 ```
 **POST `/shop` -Añadir una tienda** <br> 
+**POST `/shop/products/¨{idProducto}` -Añadir un producto a una tienda** <br> 
+Json entrada 
+```json
+{
+    "id_producto": "10",
+    "id_ubicacion": "2",
+    "precio": "10",
+}
+```
+
 **DELETE `/shop` -Dar de baja una tienda** <br> 
 **PUT/PATCH `/shop` -Modificar tienda** <br>
 **GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
@@ -121,7 +152,6 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
     }
 ]
 ```
-
 
 
 
