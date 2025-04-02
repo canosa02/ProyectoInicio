@@ -54,7 +54,32 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 **DELETE `/products/{id}` -Dar de baja un producto** <br>
 **PUT/PATCH `/products/{id}` -Modificar información del producto** <br>
 **GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
+```json
+{
+    "id": "2",
+    "nombre": "Agua",
+    {
+        "tienda" : 1,
+        "precio: "10.5"
+    }
+    {
+        "tienda" : 2,
+        "precio: "9.5"
+    }
 
+{
+    "id": "4",
+    "nombre": "Agua con gas",
+    {
+        "tienda" : 1,
+        "precio: "14"
+    }
+    {
+        "tienda" : 5,
+        "precio: "11"
+    }
+}
+```
 
 ### **Tienda** ###
 **GET `/shop` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
