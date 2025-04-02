@@ -67,18 +67,18 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 ## ENDPOINTS ##
 
 ### Productos ###
-**-Obtener datos  del  producto (id, nombre, tiendas en donde está y su precio respectivamente)** <br>
-**-Añadir un producto** <br>
-**-Dar de baja un producto** <br>
-**-Modificar información del producto** <br>
-**-Listado ( se puede aplicar filtros )** <br>
+**GET `/products/{id}` -Obtener datos del producto (id, nombre, tiendas en donde está y su precio respectivamente)** <br>
+**POST `/products` -Añadir un producto** <br>
+**DELETE `/products/{id}` -Dar de baja un producto** <br>
+**PUT/PATCH `/products/{id}` -Modificar información del producto** <br>
+**GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
 
-## **Tienda:** ##
-**-Obtener de la tienda  (id, ubicación, cantidad productos )** <br>
-**-Añadir una tienda** <br> 
-**-Dar de baja una tienda** <br> 
-**-Modificar tienda** <br>
-**-Listado ( se puede aplicar filtros )** <br>
+### **Tienda** ###
+**GET `/shop` -Obtener de la tienda  (id, ubicación, cantidad productos )** <br>
+**POST `/shop` -Añadir una tienda** <br> 
+**DELETE `/shop` -Dar de baja una tienda** <br> 
+**PUT/PATCH `/shop` -Modificar tienda** <br>
+**GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
 
 
 
