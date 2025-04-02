@@ -21,9 +21,6 @@ CREATE TABLE Tienda (
     FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
 );
 
-
-
-
 CREATE TABLE PrecioProducto(
     id_producto int  not null,
     id_ubicacion varchar(5) not null,
@@ -32,9 +29,6 @@ CREATE TABLE PrecioProducto(
     FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE,
     FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
 );
-
-
-
 
 INSERT INTO Ubicacion(id_ubicacion, pais, ciudad, direccion) values
 ("A1", "Argentina", "Buenos Aires",  "Alfredo R. Bufano 2701-2799"),

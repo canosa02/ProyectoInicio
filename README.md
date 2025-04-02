@@ -26,17 +26,7 @@ Funcionalidad que nos permita dar de baja una tienda
 Nos permite modificar las tiendas que tengamos en la base de datos
 
 #### Filtrar tiendas
-Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y dirección
-
-### Ubicación ###
-#### Alta de ubicaciones
-Funcionalidad que nos permita añadir nuevas ubicaciones
-
-#### Baja de ubicaciones
-Funcionalidad que nos permita eliminar ubicaciones ya introducidas
-
-#### Modificación de ubicaciones 
-Funcionalidad que nos permita modificar los parámetros ya introducidos en la base de datos
+Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y ubicación
 
 ## Estructura BD ##
 
