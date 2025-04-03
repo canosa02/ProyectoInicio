@@ -12,7 +12,6 @@ public class Producto{
 
     public Producto(String nombre){
         this.nombre = nombre;
-        this.precio = precio;
     }
 
     public Long getId() {
