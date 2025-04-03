@@ -1,44 +1,67 @@
-# Proyecto #
+# 🛒 Proyecto - Gestión de Productos y Tiendas  
+
+Este proyecto proporciona una API REST para la gestión de productos y tiendas. Permite realizar operaciones CRUD sobre productos y tiendas, así como filtrado y modificaciones específicas.  
+
+---
 
 ## Funcionalidades ##
-A continuación explicaremos las funcionalidades de la aplicación
-### Productos ###
-#### Alta de productos
-Funcionalidad que nos permita añadir nuevos productos a la base de datos
+### 📦 Productos  
+- **Alta de productos** → Permite añadir nuevos productos a la base de datos.  
+- **Baja de productos** → Elimina un producto de la base de datos.  
+- **Modificación de productos** → Permite modificar los valores de un producto.  
+- **Filtrar productos** → Permite buscar productos por **nombre** y **precio**.  
 
-#### Baja de productos
-Funcionalidad que nos permita quitar productos de la base de datos
 
-#### Modificación de productos
-Funcionalidad que nos permita modificar valores de los diferentes productos.
+### 🏬 Tienda  
+- **Alta de tienda** → Permite registrar una nueva tienda.  
+- **Baja de tienda** → Elimina una tienda existente.  
+- **Modificación de tienda** → Permite actualizar los datos de una tienda.  
+- **Añadir producto a tienda** → Asigna un producto a una tienda específica.  
+- **Filtrar tiendas** → Permite buscar tiendas por **nombre, país y ubicación**.  
 
-#### Filtrar productos
-Esta parte del programa nos permitirá hacer una búsqueda de los productos que queremos según su nombre y precio
-
-### Tienda ###
-#### Alta Tienda
-Funcionalidad que nos permita añadir tiendas
-
-#### Baja Tienda
-Funcionalidad que nos permita dar de baja una tienda
-
-#### Modificación de tiendas
-Nos permite modificar las tiendas que tengamos en la base de datos
-
-#### Añadir producto a la tienda
-Nos permite añadir el producto deseado a la tienda que queramos
-
-#### Filtrar tiendas
-Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y ubicación
+---
 
 
 
 ## ENDPOINTS ##
 
-### Productos ###
-**GET `/products/{idProduct}` -Obtener datos del producto (id, nombre, tiendas en donde está y su precio respectivamente)** <br>
-
-**Ejemplo JSON respuesta**
+### Productos 
+#### Obtener los productos 
+```
+http
+GET /products
+```
+Ejemplo JSON respuesta
+```json
+[
+{
+    "id": 2,
+    "nombre": "Agua",
+    "tienda":{
+        "id" : 1,
+        "precio": "10.5€"
+    },
+    "tienda":{
+        "id" : 2,
+        "precio": "9.5$"
+    }
+}
+{
+    "id": 10,
+    "nombre": "Pizza con piña",
+    "tienda":{
+        "id" : 1,
+        "precio": "10.5€"
+    }
+}
+]
+```
+#### Obtener producto por ID  
+```
+http
+GET /products/{idProduct}
+```
+Ejemplo JSON respuesta
 ```json
 {
     "id": 2,
@@ -53,12 +76,17 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
     }
 }
 ```
-**Ejemplo JSON Error**
-
+Ejemplo  Error
+```
 Salida:
 HTTP/1.1 404 Not found
+```
 
-**POST `/products` -Añadir un producto** <br>
+#### Añadir un producto
+```
+http
+POST /products
+```
 Json entrada
 ```json
 {
@@ -75,30 +103,36 @@ Json Respuesta
 }
 ```
 **Ejemplo  Error**
-Salida:
-HTTP/1.1 409 Conflict
-```json
-
-{
-    "error": "El producto ya existe",
-}
 ```
-
-**DELETE `/products` -Dar de baja un producto** <br>
+HTTP/1.1 409 Conflict
+```
+#### Borrar un producto
+```
+http
+DELETE /products
+```
 Json entrada
+
 ```json
 {
     "id": 3
 }
 ```
+
 Salida:
+```
 HTTP/1.1 200 OK
-
-**Ejemplo  Error**
-Salida:
+```
+Ejemplo  Error
+```
 HTTP/1.1 404 Not found
+```
+#### Actualizar producto 
+```
+http
+PUT `/products/{idProduct}
+```
 
-**PUT `/products/{idProduct}` -Modificar información del producto** <br>
 Json entrada
 ```json
 {
@@ -106,15 +140,24 @@ Json entrada
 }
 ```
 Salida:
+```
 HTTP/1.1 200 OK
-
-**Ejemplo  Error**
-Salida:
+```
+Ejemplo  Error
+```
 HTTP/1.1 404 Not found
+```
+#### Filtro de productos
+```
+http
+GET /products
+```
 
-**GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
-Ejemplo: 
+Ejemplo busqueda: 
+```
 GET /products?name=agua&price_min=9
+```
+Salida
 ```json
 [
       {
@@ -145,9 +188,10 @@ GET /products?name=agua&price_min=9
 ]
 ```
 
-**Ejemplo  Error**
-Salida:
+Ejemplo  Error
+```
 HTTP/1.1 404 Not found
+```
 
 ### **Tienda** ###
 **GET `/shop/{idShop}` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
@@ -166,7 +210,7 @@ HTTP/1.1 404 Not found
 
 
 **POST `/shop` -Añadir una tienda** <br> 
-Creas un ID para la ubicación. 
+Creas un ID para la ubicación. <br> 
 Json entrada 
 ```json
 {
@@ -176,18 +220,23 @@ Json entrada
     "direccion":"Av Buenos Aires"
 }
 ```
-Salida:
-HTTP/1.1 200 OK
+Salida:<br> 
+Status: 201 Created <br> 
 **POST `/shop/addProduct/{idProducto}` -Añadir un producto a una tienda** <br> 
 Json entrada 
 ```json
 {
-    "id_ubicacion":E3,
+    "id_ubicacion": "E3",
     "precio": "10.5€"
 }
 ```
 Salida:
 HTTP/1.1 200 OK
+
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 409 Conflict
+
 **DELETE `/shop` -Dar de baja una tienda** <br> 
 Json entrada
 ```json
@@ -197,6 +246,11 @@ Json entrada
 ```
 Salida:
 HTTP/1.1 200 OK
+
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
 
 
 **PUT `/shop/{idShop}` -Modificar tienda** <br>
@@ -212,6 +266,10 @@ Json entrada
 Salida:
 HTTP/1.1 200 OK
 
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
 **PATCH `/shop/{idShop}` -Modificar tienda** <br>
 Json entrada 
 ```json
@@ -223,6 +281,12 @@ Json entrada
 Salida:
 HTTP/1.1 200 OK
 
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
+
+
 **PATCH `/shop/{idShop}/products/{idProduct}/price` -Modificar precio del producto desde cada tienda** <br>
 Json entrada
 ```json
@@ -233,6 +297,12 @@ Json entrada
 
 Salida:
 HTTP/1.1 200 OK
+
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
+
 
 **GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
 Ejemplo
@@ -258,4 +328,10 @@ Get /shop?pais=España&products_min=10
     }
 ]
 ```
+
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
+
 
