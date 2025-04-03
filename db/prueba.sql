@@ -28,7 +28,7 @@ CREATE TABLE precioProducto(
     primary key (id_producto,id_ubicacion),
     FOREIGN KEY (id_producto) REFERENCES productos(id_producto) ON DELETE CASCADE,
     FOREIGN KEY (id_ubicacion) REFERENCES ubicacion(id_ubicacion) ON DELETE CASCADE
-);
+);id
 
 INSERT INTO ubicacion(id_ubicacion, pais, ciudad, direccion) values
 ('A1', 'Argentina', 'Buenos Aires',  'Alfredo R. Bufano 2701-2799'),

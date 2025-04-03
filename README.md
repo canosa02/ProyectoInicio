@@ -26,7 +26,7 @@ Funcionalidad que nos permita dar de baja una tienda
 Nos permite modificar las tiendas que tengamos en la base de datos
 
 #### Añadir producto a la tienda
-Nos permite añadir el producto deseado a  la tienda que queramos
+Nos permite añadir el producto deseado a la tienda que queramos
 
 #### Filtrar tiendas
 Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y ubicación
@@ -122,7 +122,7 @@ GET /products?name=agua&price_min=9
             "precio": "14€"
         },
         "tienda":{
-            "id" : 5
+            "id" : 5,
             "precio": "20$"
         }
     }
