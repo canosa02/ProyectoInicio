@@ -41,7 +41,7 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
 **Ejemplo JSON respuesta**
 ```json
 {
-    "id": "2",
+    "id": 2,
     "nombre": "Agua",
     "tienda":{
         "id" : 1,
@@ -80,7 +80,7 @@ HTTP/1.1 200 OK
   "message": "El producto ha sido eliminado"
 }
 
-**PUT/PATCH `/products/{idProduct}/change` -Modificar información del producto** <br>
+**PUT/PATCH `/products/{idProduct}/modify` -Modificar información del producto** <br>
 Json entrada
 ```json
 {
@@ -95,23 +95,10 @@ Json Respuesta
    "message": "Producto modificado"
 }
 ```
-**PUT/PATCH `/shop/{idShop}/products/{idProduct}/price` -Modificar precio del producto desde cada tienda** <br>
-Json entrada
-```json
-{
-   "precio" : 14.5
-}
-```
-
-Json Respuesta
-
-```json
-{
-   "message": "Precio del producto  modificado"
-}
-```
 
 **GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
+Ejemplo: 
+GET /products?name=agua&price_min=9
 ```json
 [
       {
@@ -119,31 +106,31 @@ Json Respuesta
         "nombre": "Agua",
         "tienda": {
           "id": 1,
-          "precio": 10.5
+          "precio": "10.5€"
         },
         "tienda": {
           "id": 2,
-          "precio": 9.5
+          "precio": "9.5€"
         }
       },
     
     {
-        "id": "4",
+        "id": 4,
         "nombre": "Agua con gas",
         "tienda":{
             "id" : 1,
-            "precio": 14
+            "precio": "14€"
         },
         "tienda":{
-            "id" : 5,
-            "precio": 11
+            "id" : 5
+            "precio": "20$"
         }
     }
 ]
 ```
 
 ### **Tienda** ###
-**GET `/shop` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
+**GET `/shop/{idShop}` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
 ```json
 {
     "id": 4,
@@ -154,12 +141,12 @@ Json Respuesta
     "Número de productos": 30
 }
 ```
-**POST `/shop` -Añadir una tienda** <br> 
+**POST `/shop/add` -Añadir una tienda** <br> 
 Json entrada 
 ```json
 {
     "id_ubicacion": "E3",
-    "pais": "España,
+    "pais": "España",
     "ciudad": "Santiago",
     "direccion":"Av Buenos Aires"
 }
@@ -171,13 +158,13 @@ Json salida
 }
 ```
 // Duda -> Está bien estructurado de forma que para dar un alta solo haya que agregar la ubicación de esta?
-**POST `/shop/products/¨{idProducto}` -Añadir un producto a una tienda** <br> 
+**POST `/shop/addProduct/{idProducto}` -Añadir un producto a una tienda** <br> 
 Json entrada 
 ```json
 {
     "id_producto": 10,
     "id_ubicacion": 2,
-    "precio": "10"
+    "precio": "10.5€"
 }
 ```
 Json salida 
@@ -198,7 +185,7 @@ HTTP/1.1 200 OK
 
 
 
-**PUT/PATCH `/shop/change` -Modificar tienda** <br>
+**PUT/PATCH `/shop/modify` -Modificar tienda** <br>
 Json entrada 
 ```json
 {
@@ -213,13 +200,32 @@ Json salida
     "message" : "Actualizada correctamente"
 }
 ```
+
+**PUT/PATCH `/shop/{idShop}/products/{idProduct}/price` -Modificar precio del producto desde cada tienda** <br>
+Json entrada
+```json
+{
+   "precio" : "14.5€"
+}
+```
+
+Json Respuesta
+
+```json
+{
+   "message": "Precio del producto  modificado"
+}
+```
+
 **GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
+Ejemplo
+Get /shop?pais=España&products_min=10
 ```json
 [
     {
         "id": 4,
         "id_ubicacion": 1,
-        "país": "España",
+        "pais": "España",
         "ciudad": "Coruña",
         "direccion": "Av. Finisterre",
         "Número de productos": 30
@@ -228,7 +234,7 @@ Json salida
     {
         "id": 6,
         "id_ubicacion": 1,
-        "país": "España",
+        "pais": "España",
         "ciudad": "Santiago",
         "direccion": "Av Orense",
         "Número de productos": 20
