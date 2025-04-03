@@ -24,7 +24,7 @@ CREATE TABLE Tienda (
 CREATE TABLE PrecioProducto(
     id_producto int  not null,
     id_ubicacion varchar(5) not null,
-    precio DECIMAL(10, 2) not null,
+    precio varchar(15) not null,
     primary key (id_producto,id_ubicacion),
     FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE,
     FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
