@@ -53,7 +53,12 @@ Funcionalidad con la cual podremos filtrar las tiendas según su nombre, país y
     }
 }
 ```
-**POST `/products/new` -Añadir un producto** <br>
+**Ejemplo JSON Error**
+
+Salida:
+HTTP/1.1 404 Not found
+
+**POST `/products` -Añadir un producto** <br>
 Json entrada
 ```json
 {
@@ -69,32 +74,43 @@ Json Respuesta
     "nombre": "Pizza con piña"
 }
 ```
-**DELETE `/products/delete/{idProduct}` -Dar de baja un producto** <br>
-Entrada:
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 409 Conflict
+```json
 
-DELETE /products/delete/10
+{
+    "error": "El producto ya existe",
+}
+```
 
+**DELETE `/products` -Dar de baja un producto** <br>
+Json entrada
+```json
+{
+    "id": 3
+}
+```
 Salida:
 HTTP/1.1 200 OK
-{
-  "message": "El producto ha sido eliminado"
-}
 
-**PUT/PATCH `/products/{idProduct}/modify` -Modificar información del producto** <br>
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
+**PUT `/products/{idProduct}` -Modificar información del producto** <br>
 Json entrada
 ```json
 {
     "nombre": "Pizza con piña y chocolate"
 }
 ```
+Salida:
+HTTP/1.1 200 OK
 
-Json Respuesta
-
-```json
-{
-   "message": "Producto modificado"
-}
-```
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
 
 **GET `/products?=` -Listado ( se puede aplicar filtros )** <br>
 Ejemplo: 
@@ -129,19 +145,28 @@ GET /products?name=agua&price_min=9
 ]
 ```
 
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
 ### **Tienda** ###
 **GET `/shop/{idShop}` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
 ```json
 {
-    "id": 4,
-    "id_ubicacion": 1,
+    "id_ubicacion": "E3",
     "país": "España",
     "ciudad": "Coruña",
     "direccion": "Av. Finisterre",
     "Número de productos": 30
 }
 ```
-**POST `/shop/add` -Añadir una tienda** <br> 
+**Ejemplo  Error**
+Salida:
+HTTP/1.1 404 Not found
+
+
+**POST `/shop` -Añadir una tienda** <br> 
+Creas un ID para la ubicación. 
 Json entrada 
 ```json
 {
@@ -151,57 +176,54 @@ Json entrada
     "direccion":"Av Buenos Aires"
 }
 ```
-Json salida 
-```json
-{
-    "message" : "Tienda creada correctamente"
-}
-```
-// Duda -> Está bien estructurado de forma que para dar un alta solo haya que agregar la ubicación de esta?
+Salida:
+HTTP/1.1 200 OK
 **POST `/shop/addProduct/{idProducto}` -Añadir un producto a una tienda** <br> 
 Json entrada 
 ```json
 {
-    "id_producto": 10,
-    "id_ubicacion": 2,
+    "id_ubicacion":E3,
     "precio": "10.5€"
 }
 ```
-Json salida 
-```json
-{
-    "message" : "Precio añadido correctamente"
-}
-```
-**DELETE `/shop/delete/{idShop}` -Dar de baja una tienda** <br> 
-Entrada:
-DELETE /shop/delete/10
-
 Salida:
 HTTP/1.1 200 OK
+**DELETE `/shop` -Dar de baja una tienda** <br> 
+Json entrada
+```json
 {
-  "message": "La tienda se ha borrado correctamente"
+    "id": "E3"
 }
+```
+Salida:
+HTTP/1.1 200 OK
 
 
-
-**PUT/PATCH `/shop/modify` -Modificar tienda** <br>
+**PUT `/shop/{idShop}` -Modificar tienda** <br>
 Json entrada 
 ```json
 {
-    "id": 10,
-    "id_ubicacion": 2,
+    "id_ubicacion": "E3",
+    "pais": "España",
+    "ciudad":" A Coruña",
     "direccion": "Av de Arteixo 6"
 }
 ```
-Json salida 
+Salida:
+HTTP/1.1 200 OK
+
+**PATCH `/shop/{idShop}` -Modificar tienda** <br>
+Json entrada 
 ```json
 {
-    "message" : "Actualizada correctamente"
+    "id_ubicacion": "E3",
+    "ciudad":" Santiago",
 }
 ```
+Salida:
+HTTP/1.1 200 OK
 
-**PUT/PATCH `/shop/{idShop}/products/{idProduct}/price` -Modificar precio del producto desde cada tienda** <br>
+**PATCH `/shop/{idShop}/products/{idProduct}/price` -Modificar precio del producto desde cada tienda** <br>
 Json entrada
 ```json
 {
@@ -209,13 +231,8 @@ Json entrada
 }
 ```
 
-Json Respuesta
-
-```json
-{
-   "message": "Precio del producto  modificado"
-}
-```
+Salida:
+HTTP/1.1 200 OK
 
 **GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
 Ejemplo
@@ -241,9 +258,4 @@ Get /shop?pais=España&products_min=10
     }
 ]
 ```
-
-
-
-Duda: Endpoints como delete, donde solo se necesita borrar mediante el id, es mejor hacerlo por url o pasar esta mediante json por estanderizar? 
-
 
