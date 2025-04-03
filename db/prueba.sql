@@ -16,7 +16,7 @@ CREATE TABLE ubicacion(
 );
 
 CREATE TABLE tienda (
-    id SERIAL primary key,
+    id_shop SERIAL primary key,
     id_ubicacion varchar(5) not null,
     FOREIGN KEY (id_ubicacion) REFERENCES ubicacion(id_ubicacion) ON DELETE CASCADE
 );
