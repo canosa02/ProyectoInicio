@@ -18,7 +18,7 @@ CREATE TABLE ubicacion(
 CREATE TABLE tienda (
     id SERIAL primary key,
     id_ubicacion varchar(5) not null,
-    FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
+    FOREIGN KEY (id_ubicacion) REFERENCES ubicacion(id_ubicacion) ON DELETE CASCADE
 );
 
 CREATE TABLE precioProducto(
@@ -26,8 +26,8 @@ CREATE TABLE precioProducto(
     id_ubicacion varchar(5) not null,
     precio varchar(15) not null,
     primary key (id_producto,id_ubicacion),
-    FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE,
-    FOREIGN KEY (id_ubicacion) REFERENCES Ubicacion(id_ubicacion) ON DELETE CASCADE
+    FOREIGN KEY (id_producto) REFERENCES productos(id_producto) ON DELETE CASCADE,
+    FOREIGN KEY (id_ubicacion) REFERENCES ubicacion(id_ubicacion) ON DELETE CASCADE
 );
 
 INSERT INTO ubicacion(id_ubicacion, pais, ciudad, direccion) values
