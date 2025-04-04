@@ -44,7 +44,7 @@ public class ShopController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteShop(@PathVariable Long id){
+    public String deleteShop(@PathVariable int id){
         for(ShopModel shop : shops){
             if(shop.getIdShop() == id){
                 shops.remove(shop);

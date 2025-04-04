@@ -109,7 +109,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo name no existe"
+    "message": "El campo name no existe"
 }
 ```
 #### Borrar un producto
@@ -149,7 +149,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo nombre no existe"
+    "message": "El campo nombre no existe"
 }
 ```
 #### Filtro de productos
