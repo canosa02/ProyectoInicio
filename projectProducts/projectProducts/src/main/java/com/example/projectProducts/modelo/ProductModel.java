@@ -1,5 +1,7 @@
 package com.example.projectProducts.modelo;
 
+import java.util.List;
+
 public class ProductModel {
 
     private int idProducts;
