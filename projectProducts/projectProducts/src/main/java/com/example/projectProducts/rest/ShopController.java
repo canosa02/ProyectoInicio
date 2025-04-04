@@ -1,7 +1,8 @@
-package com.example.projectproducts.project_products.rest;
+package com.example.projectProducts.rest;
 
 
-import com.example.projectproducts.project_products.modelo.ShopModel;
+
+import com.example.projectProducts.modelo.ShopModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
