@@ -13,8 +13,8 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 
 
 ### 🏬 Tienda  
-- **Alta de ** → Permite registrar una nueva .  
-- **Baja de ** → Elimina una  existente.  
+- **Alta de tienda** → Permite registrar una nueva .  
+- **Baja de tienda** → Elimina una  existente.  
 - **Modificación de tienda** → Permite actualizar los datos de una tienda.  
 - **Añadir  a tienda** → Asigna un  a una tienda específica.  
 - **Filtrar tiendas** → Permite buscar tiendas por **name, país y ubicación**.  
@@ -249,7 +249,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo denominación no existe"
+    "message": "El campo denominación no existe"
 }
 ```
 #### Añadir un producto a la tienda 
@@ -356,7 +356,7 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "El campo id_ubicaion no existe"
+    "message": "El campo id_ubicacion no existe"
 }
 ```
 #### Actualizar el precio del producto
