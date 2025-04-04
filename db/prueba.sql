@@ -1,10 +1,10 @@
 CREATE DATABASE IF NOT EXISTS Proyect1;
 
-USE Proyect1;
+USE Proyect1;<
 
 
 CREATE TABLE products (
-    idProduct SERIAL primary key,
+    productId SERIAL primary key,
     name varchar(30) not null
 );
 
