@@ -25,7 +25,7 @@ public class ShopController {
     @GetMapping("/{id}")
     public ShopModel getShop(@PathVariable int id){
         for(ShopModel shop : shops){
-            if(shop.getIdShop() == id){
+            if(shop.getShopId() == id){
                 return shop;
             }
         }
@@ -46,7 +46,7 @@ public class ShopController {
     @DeleteMapping("/{id}")
     public String deleteShop(@PathVariable int id){
         for(ShopModel shop : shops){
-            if(shop.getIdShop() == id){
+            if(shop.getShopId() == id){
                 shops.remove(shop);
                 return "HTTP/1.1 200 OK";
             }

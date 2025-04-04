@@ -6,38 +6,38 @@ import java.io.Serializable;
 
 public class ShopModel implements Serializable {
 
-    private int idShop;
-    private String idUbicacion;
+    private int shopId;
+    private String locationId;
 
     public ShopModel() {
     }
 
-    public ShopModel(int id_shop, String idUbicacion) {
-        this.idShop = id_shop;
-        this.idUbicacion = idUbicacion;
+    public ShopModel(int shopId, String locationId) {
+        this.shopId = shopId;
+        this.locationId = locationId;
     }
 
-    public int getIdShop() {
-        return idShop;
+    public int getShopId() {
+        return shopId;
     }
 
-    public void setIdShop(int idShop) {
-        this.idShop = idShop;
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 
-    public String getIdUbicacion() {
-        return idUbicacion;
+    public String getLocationId() {
+        return locationId;
     }
 
-    public void setIdUbicacion(String idUbicacion) {
-        this.idUbicacion = idUbicacion;
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
     }
 
     @Override
     public String toString() {
         return "Tienda{" +
-                "id_shop=" + idShop +
-                ", id_ubicacion='" + idUbicacion + '\'' +
+                "id_shop=" + shopId +
+                ", id_ubicacion='" + locationId + '\'' +
                 '}';
     }
 }

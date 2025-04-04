@@ -23,7 +23,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ProductModel getProduct(@PathVariable int id){
         for(ProductModel product : products){
-            if(product.getIdProducts() == id){
+            if(product.getProductId() == id){
                 return product;
             }
         }
@@ -43,7 +43,7 @@ public class ProductController {
     @DeleteMapping({"/{id}"})
     public  String deleteProduct(@PathVariable int id){
         for(ProductModel product : products){
-            if(product.getIdProducts() == id){
+            if(product.getProductId() == id){
                 products.remove(product);
                 return "HTTP/1.1 200 OK";
             }

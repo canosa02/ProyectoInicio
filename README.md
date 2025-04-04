@@ -45,7 +45,7 @@ Ejemplo JSON respuesta
         "shopId" : 2,
         "price": "9.5$"
     }
-}
+},
 {
     "productId": 10,
     "name": "Pizza con piña",
@@ -109,7 +109,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo name no existe"
+    "message": "El campo name no existe"
 }
 ```
 #### Borrar un producto
@@ -149,7 +149,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo nombre no existe"
+    "message": "El campo nombre no existe"
 }
 ```
 #### Filtro de productos
@@ -337,7 +337,7 @@ Json entrada
 ```json
 {
     "locationId": "E3",
-    "city":" Santiago",
+    "city":" Santiago"
 }
 ```
 Salida:

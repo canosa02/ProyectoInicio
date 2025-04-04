@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS Proyect1;
 
-USE Proyect1;<
+USE Proyect1;
 
 
 CREATE TABLE products (
