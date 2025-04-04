@@ -2,23 +2,23 @@ package com.example.projectProducts.modelo;
 
 public class ProductModel {
 
-    private int idProducts;
+    private int productId;
     private String name;
 
     public ProductModel() {
     }
 
-    public ProductModel(int idProducts, String name) {
-        this.idProducts = idProducts;
+    public ProductModel(int productId, String name) {
+        this.productId = productId;
         this.name = name;
     }
 
-    public int getIdProducts() {
-        return idProducts;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setIdProducts(int idProducts) {
-        this.idProducts = idProducts;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -32,7 +32,7 @@ public class ProductModel {
     @Override
     public String toString() {
         return "ProductModel{" +
-                "idProducts=" + idProducts +
+                "productId=" + productId +
                 ", name='" + name + '\'' +
                 '}';
     }

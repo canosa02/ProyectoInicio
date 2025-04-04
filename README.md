@@ -45,7 +45,7 @@ Ejemplo JSON respuesta
         "shopId" : 2,
         "price": "9.5$"
     }
-}
+},
 {
     "productId": 10,
     "name": "Pizza con piña",
@@ -337,7 +337,7 @@ Json entrada
 ```json
 {
     "locationId": "E3",
-    "city":" Santiago",
+    "city":" Santiago"
 }
 ```
 Salida:
