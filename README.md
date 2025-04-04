@@ -13,10 +13,10 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 
 
 ### 🏬 Tienda  
-- **Alta de tienda** → Permite registrar una nueva tienda.  
-- **Baja de tienda** → Elimina una tienda existente.  
+- **Alta de ** → Permite registrar una nueva .  
+- **Baja de ** → Elimina una  existente.  
 - **Modificación de tienda** → Permite actualizar los datos de una tienda.  
-- **Añadir producto a tienda** → Asigna un producto a una tienda específica.  
+- **Añadir  a tienda** → Asigna un  a una tienda específica.  
 - **Filtrar tiendas** → Permite buscar tiendas por **name, país y ubicación**.  
 
 ---
@@ -204,16 +204,16 @@ HTTP/1.1 404 Not found
 
 ```
 http
-GET /shop/{idShop}
+GET /shop/{shopId}
 ```
 Ejemplo salida
 ```json
 {
-    "id_ubicacion": "E3",
-    "país": "España",
-    "ciudad": "Coruña",
-    "direccion": "Av. Finisterre",
-    "Número de productos": 30
+    "locationId": "E3",
+    "country": "España",
+    "city": "Coruña",
+    "address": "Av. Finisterre",
+    "Number of products": 30
 }
 ```
 Ejemplo  Error
@@ -230,10 +230,10 @@ POST `/shop`
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "pais": "España",
-    "ciudad": "Santiago",
-    "direccion":"Av Buenos Aires"
+    "locationId": "E3",
+    "country": "España",
+    "city": "Santiago",
+    "address":"Av Buenos Aires"
 }
 ```
 
@@ -255,13 +255,13 @@ Json Respuesta
 #### Añadir un producto a la tienda 
 ```
 http
-POST /shop/addProduct/{productIdo}
+POST /shop/addProduct/{productId}
 ```
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "precio": "10.5€"
+    "locationId": "E3",
+    "price": "10.5€"
 }
 ```
 Respuesta
@@ -281,7 +281,7 @@ Json Salida
 #### Dar de baja una tienda
 ```
 http
-DELETE /shop/{idShop}
+DELETE /shop/{shopId}
 ```
 
 Salida:
@@ -297,16 +297,16 @@ HTTP/1.1 404 Not found
 #### Actualizar tienda
 ```
 http
-PUT `/shop/{idShop}
+PUT `/shop/{shopId}
 ```
 
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "pais": "España",
-    "ciudad":" A Coruña",
-    "direccion": "Av de Arteixo 6"
+    "locationId": "E3",
+    "country": "España",
+    "city":" A Coruña",
+    "address": "Av de Arteixo 6"
 }
 ```
 Salida:
@@ -331,13 +331,13 @@ Json salida
 #### Actualizar parcialmente la tienda 
 ```
 http
-PATCH /shop/{idShop}
+PATCH /shop/{shopId}
 ```
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "ciudad":" Santiago",
+    "locationId": "E3",
+    "city":" Santiago",
 }
 ```
 Salida:
@@ -356,13 +356,13 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "El campo id_localizacion no existe"
+    "message": "El campo id_ubicaion no existe"
 }
 ```
 #### Actualizar el precio del producto
 ```
 http
-PATCH /shop/{idShop}/products/{productId}/price
+PATCH /shop/{shopId}/products/{productId}/price
 ```
 Json entrada
 ```json
@@ -397,27 +397,27 @@ GET /shop?=
 ```
 Ejemplo
 ```
-Get /shop?pais=España&products_min=10
+Get /shop?country=España&products_min=10
 ```
 Json respuesta
 ```json
 [
     {
-        "id": 4,
-        "id_ubicacion": 1,
-        "pais": "España",
-        "ciudad": "Coruña",
-        "direccion": "Av. Finisterre",
-        "Número de productos": 30
+        "shopId": 4,
+        "locationId": 1,
+        "country": "España",
+        "city": "Coruña",
+        "address": "Av. Finisterre",
+        "Number of products": 30
     },
     
     {
-        "id": 6,
-        "id_ubicacion": 1,
-        "pais": "España",
-        "ciudad": "Santiago",
-        "direccion": "Av Orense",
-        "Número de productos": 20
+        "shopId": 6,
+        "locationId": 1,
+        "country": "España",
+        "city": "Santiago",
+        "address": "Av Orense",
+        "Number of products": 20
     }
 ]
 ```
