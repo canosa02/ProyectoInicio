@@ -9,7 +9,7 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 - **Alta de productos** → Permite añadir nuevos productos a la base de datos.  
 - **Baja de productos** → Elimina un producto de la base de datos.  
 - **Modificación de productos** → Permite modificar los valores de un producto.  
-- **Filtrar productos** → Permite buscar productos por **nombre** y **precio**.  
+- **Filtrar productos** → Permite buscar productos por **name** y **precio**.  
 
 
 ### 🏬 Tienda  
@@ -17,7 +17,7 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 - **Baja de tienda** → Elimina una tienda existente.  
 - **Modificación de tienda** → Permite actualizar los datos de una tienda.  
 - **Añadir producto a tienda** → Asigna un producto a una tienda específica.  
-- **Filtrar tiendas** → Permite buscar tiendas por **nombre, país y ubicación**.  
+- **Filtrar tiendas** → Permite buscar tiendas por **name, país y ubicación**.  
 
 ---
 
@@ -35,23 +35,23 @@ Ejemplo JSON respuesta
 ```json
 [
 {
-    "id": 2,
-    "nombre": "Agua",
-    "tienda":{
-        "id" : 1,
-        "precio": "10.5€"
+    "productId": 2,
+    "name": "Agua",
+    "shop":{
+        "shopId" : 1,
+        "price": "10.5€"
     },
-    "tienda":{
-        "id" : 2,
-        "precio": "9.5$"
+    "shop":{
+        "shopId" : 2,
+        "price": "9.5$"
     }
 }
 {
-    "id": 10,
-    "nombre": "Pizza con piña",
-    "tienda":{
-        "id" : 1,
-        "precio": "10.5€"
+    "productId": 10,
+    "name": "Pizza con piña",
+    "shop":{
+        "shopId" : 1,
+        "price": "10.5€"
     }
 }
 ]
@@ -59,20 +59,20 @@ Ejemplo JSON respuesta
 #### Obtener producto por ID  
 ```
 http
-GET /products/{idProduct}
+GET /products/{productId}
 ```
 Ejemplo JSON respuesta
 ```json
 {
-    "id": 2,
-    "nombre": "Agua",
-    "tienda":{
-        "id" : 1,
-        "precio": "10.5€"
+    "productId": 2,
+    "name": "Agua",
+    "shop":{
+        "shopId" : 1,
+        "price": "10.5€"
     },
-    "tienda":{
-        "id" : 2,
-        "precio": "9.5$"
+    "shop":{
+        "shopId" : 2,
+        "price": "9.5$"
     }
 }
 ```
@@ -89,7 +89,7 @@ POST /products
 Json entrada
 ```json
 {
-    "nombre": "Pizza con piña"
+    "name": "Pizza con piña"
 }
 ```
 
@@ -97,8 +97,8 @@ Json Respuesta
 
 ```json
 {
-    "id": 10,
-    "nombre": "Pizza con piña"
+    "productId": 10,
+    "name": "Pizza con piña"
 }
 ```
 **Ejemplo  Error**
@@ -115,7 +115,7 @@ Json Respuesta
 #### Borrar un producto
 ```
 http
-DELETE /products/{idProduct}
+DELETE /products/{productId}
 ```
 Respuesta:
 ```
@@ -128,13 +128,13 @@ HTTP/1.1 404 Not found
 #### Actualizar producto 
 ```
 http
-PUT `/products/{idProduct}
+PUT `/products/{productId}
 ```
 
 Json entrada
 ```json
 {
-    "nombre": "Pizza con piña y chocolate"
+    "name": "Pizza con piña y chocolate"
 }
 ```
 Respuesta:
@@ -149,7 +149,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo name no existe"
+    "menssage": "El campo nombre no existe"
 }
 ```
 #### Filtro de productos
@@ -166,28 +166,28 @@ Salida
 ```json
 [
       {
-        "id": 2,
-        "nombre": "Agua",
-        "tienda": {
-          "id": 1,
-          "precio": "10.5€"
+        "productId": 2,
+        "name": "Agua",
+        "shop": {
+          "shopId": 1,
+          "price": "10.5€"
         },
-        "tienda": {
-          "id": 2,
-          "precio": "9.5€"
+        "shop": {
+          "shopId": 2,
+          "price": "9.5€"
         }
       },
     
     {
-        "id": 4,
-        "nombre": "Agua con gas",
-        "tienda":{
-            "id" : 1,
-            "precio": "14€"
+        "productId": 4,
+        "name": "Agua con gas",
+        "shop":{
+            "shopId" : 1,
+            "price": "14€"
         },
-        "tienda":{
-            "id" : 5,
-            "precio": "20$"
+        "shop":{
+            "shopId" : 5,
+            "price": "20$"
         }
     }
 ]
@@ -255,7 +255,7 @@ Json Respuesta
 #### Añadir un producto a la tienda 
 ```
 http
-POST /shop/addProduct/{idProducto}
+POST /shop/addProduct/{productIdo}
 ```
 Json entrada 
 ```json
@@ -362,7 +362,7 @@ Json salida
 #### Actualizar el precio del producto
 ```
 http
-PATCH /shop/{idShop}/products/{idProduct}/price
+PATCH /shop/{idShop}/products/{productId}/price
 ```
 Json entrada
 ```json
