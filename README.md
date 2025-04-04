@@ -78,7 +78,6 @@ Ejemplo JSON respuesta
 ```
 Ejemplo  Error
 ```
-Salida:
 HTTP/1.1 404 Not found
 ```
 
@@ -106,13 +105,19 @@ Json Respuesta
 ```
 HTTP/1.1 400 Bad request
 ```
+Json Respuesta
 
+```json
+{
+    "menssage": "El campo name no existe"
+}
+```
 #### Borrar un producto
 ```
 http
 DELETE /products/{idProduct}
 ```
-Salida:
+Respuesta:
 ```
 HTTP/1.1 200 OK
 ```
@@ -132,13 +137,20 @@ Json entrada
     "nombre": "Pizza con piña y chocolate"
 }
 ```
-Salida:
+Respuesta:
 ```
 HTTP/1.1 200 OK
 ```
-Ejemplo  Error
+**Ejemplo  Error**
 ```
-HTTP/1.1 404 Not found
+HTTP/1.1 400 Bad request
+```
+Json Respuesta
+
+```json
+{
+    "menssage": "El campo name no existe"
+}
 ```
 #### Filtro de productos
 ```
@@ -188,7 +200,6 @@ HTTP/1.1 404 Not found
 
 ### **Tienda** ###
 
-
 #### Obtener una tienda por id
 
 ```
@@ -206,7 +217,6 @@ Ejemplo salida
 }
 ```
 Ejemplo  Error
-Salida:
 ```
 HTTP/1.1 404 Not found
 ```
@@ -231,6 +241,17 @@ Salida
 ```
 Status: 201 Created 
 ```
+**Ejemplo error**
+```
+HTTP/1.1 400 Bad request
+```
+Json Respuesta
+
+```json
+{
+    "menssage": "El campo denominación no existe"
+}
+```
 #### Añadir un producto a la tienda 
 ```
 http
@@ -243,13 +264,13 @@ Json entrada
     "precio": "10.5€"
 }
 ```
-Salida:
+Respuesta
 ```
 HTTP/1.1 200 OK
 ```
-Ejemplo  Error
+**Ejemplo  Error**
 ```
-HTTP/1.1 409 Conflict
+HTTP/1.1 400 Bad request
 ```
 Json Salida 
 ```json
@@ -270,7 +291,6 @@ HTTP/1.1 200 OK
 
 Ejemplo  Error
 
-Salida:
 ```
 HTTP/1.1 404 Not found
 ```
@@ -298,6 +318,16 @@ Salida
 ```
 HTTP/1.1 404 Not found
 ```
+Ejemplo error
+```
+HTTP/1.1 400 Bad request
+```
+Json salida 
+```json
+{
+    "message": "El campo calle no existe"
+}
+```
 #### Actualizar parcialmente la tienda 
 ```
 http
@@ -319,7 +349,16 @@ Salida
 ```
 HTTP/1.1 404 Not found
 ```
-
+Ejemplo error
+```
+HTTP/1.1 400 Bad request
+```
+Json salida 
+```json
+{
+    "message": "El campo id_localizacion no existe"
+}
+```
 #### Actualizar el precio del producto
 ```
 http
@@ -340,6 +379,16 @@ Ejemplo  Error
 Salida
 ```
 HTTP/1.1 404 Not found
+```
+Ejemplo error
+```
+HTTP/1.1 400 Bad request
+```
+Json salida 
+```json
+{
+    "message": "El campo coste no existe"
+}
 ```
 #### Listado con filtros de tiendas 
 ```
@@ -372,11 +421,10 @@ Json respuesta
     }
 ]
 ```
-
 Ejemplo  Error
-Salida:
 ```
 HTTP/1.1 404 Not found
 ```
+
 
 
