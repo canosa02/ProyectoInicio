@@ -9,15 +9,15 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 - **Alta de productos** → Permite añadir nuevos productos a la base de datos.  
 - **Baja de productos** → Elimina un producto de la base de datos.  
 - **Modificación de productos** → Permite modificar los valores de un producto.  
-- **Filtrar productos** → Permite buscar productos por **nombre** y **precio**.  
+- **Filtrar productos** → Permite buscar productos por **name** y **precio**.  
 
 
 ### 🏬 Tienda  
-- **Alta de tienda** → Permite registrar una nueva tienda.  
-- **Baja de tienda** → Elimina una tienda existente.  
+- **Alta de ** → Permite registrar una nueva .  
+- **Baja de ** → Elimina una  existente.  
 - **Modificación de tienda** → Permite actualizar los datos de una tienda.  
-- **Añadir producto a tienda** → Asigna un producto a una tienda específica.  
-- **Filtrar tiendas** → Permite buscar tiendas por **nombre, país y ubicación**.  
+- **Añadir  a tienda** → Asigna un  a una tienda específica.  
+- **Filtrar tiendas** → Permite buscar tiendas por **name, país y ubicación**.  
 
 ---
 
@@ -35,23 +35,23 @@ Ejemplo JSON respuesta
 ```json
 [
 {
-    "id": 2,
-    "nombre": "Agua",
-    "tienda":{
-        "id" : 1,
-        "precio": "10.5€"
+    "productId": 2,
+    "name": "Agua",
+    "shop":{
+        "shopId" : 1,
+        "price": "10.5€"
     },
-    "tienda":{
-        "id" : 2,
-        "precio": "9.5$"
+    "shop":{
+        "shopId" : 2,
+        "price": "9.5$"
     }
 }
 {
-    "id": 10,
-    "nombre": "Pizza con piña",
-    "tienda":{
-        "id" : 1,
-        "precio": "10.5€"
+    "productId": 10,
+    "name": "Pizza con piña",
+    "shop":{
+        "shopId" : 1,
+        "price": "10.5€"
     }
 }
 ]
@@ -59,20 +59,20 @@ Ejemplo JSON respuesta
 #### Obtener producto por ID  
 ```
 http
-GET /products/{idProduct}
+GET /products/{productId}
 ```
 Ejemplo JSON respuesta
 ```json
 {
-    "id": 2,
-    "nombre": "Agua",
-    "tienda":{
-        "id" : 1,
-        "precio": "10.5€"
+    "productId": 2,
+    "name": "Agua",
+    "shop":{
+        "shopId" : 1,
+        "price": "10.5€"
     },
-    "tienda":{
-        "id" : 2,
-        "precio": "9.5$"
+    "shop":{
+        "shopId" : 2,
+        "price": "9.5$"
     }
 }
 ```
@@ -89,7 +89,7 @@ POST /products
 Json entrada
 ```json
 {
-    "nombre": "Pizza con piña"
+    "name": "Pizza con piña"
 }
 ```
 
@@ -97,8 +97,8 @@ Json Respuesta
 
 ```json
 {
-    "id": 10,
-    "nombre": "Pizza con piña"
+    "productId": 10,
+    "name": "Pizza con piña"
 }
 ```
 **Ejemplo  Error**
@@ -115,7 +115,7 @@ Json Respuesta
 #### Borrar un producto
 ```
 http
-DELETE /products/{idProduct}
+DELETE /products/{productId}
 ```
 Respuesta:
 ```
@@ -128,13 +128,13 @@ HTTP/1.1 404 Not found
 #### Actualizar producto 
 ```
 http
-PUT `/products/{idProduct}
+PUT `/products/{productId}
 ```
 
 Json entrada
 ```json
 {
-    "nombre": "Pizza con piña y chocolate"
+    "name": "Pizza con piña y chocolate"
 }
 ```
 Respuesta:
@@ -149,7 +149,7 @@ Json Respuesta
 
 ```json
 {
-    "menssage": "El campo name no existe"
+    "menssage": "El campo nombre no existe"
 }
 ```
 #### Filtro de productos
@@ -166,28 +166,28 @@ Salida
 ```json
 [
       {
-        "id": 2,
-        "nombre": "Agua",
-        "tienda": {
-          "id": 1,
-          "precio": "10.5€"
+        "productId": 2,
+        "name": "Agua",
+        "shop": {
+          "shopId": 1,
+          "price": "10.5€"
         },
-        "tienda": {
-          "id": 2,
-          "precio": "9.5€"
+        "shop": {
+          "shopId": 2,
+          "price": "9.5€"
         }
       },
     
     {
-        "id": 4,
-        "nombre": "Agua con gas",
-        "tienda":{
-            "id" : 1,
-            "precio": "14€"
+        "productId": 4,
+        "name": "Agua con gas",
+        "shop":{
+            "shopId" : 1,
+            "price": "14€"
         },
-        "tienda":{
-            "id" : 5,
-            "precio": "20$"
+        "shop":{
+            "shopId" : 5,
+            "price": "20$"
         }
     }
 ]
@@ -204,16 +204,16 @@ HTTP/1.1 404 Not found
 
 ```
 http
-GET /shop/{idShop}
+GET /shop/{shopId}
 ```
 Ejemplo salida
 ```json
 {
-    "id_ubicacion": "E3",
-    "país": "España",
-    "ciudad": "Coruña",
-    "direccion": "Av. Finisterre",
-    "Número de productos": 30
+    "locationId": "E3",
+    "country": "España",
+    "city": "Coruña",
+    "address": "Av. Finisterre",
+    "Number of products": 30
 }
 ```
 Ejemplo  Error
@@ -230,10 +230,10 @@ POST `/shop`
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "pais": "España",
-    "ciudad": "Santiago",
-    "direccion":"Av Buenos Aires"
+    "locationId": "E3",
+    "country": "España",
+    "city": "Santiago",
+    "address":"Av Buenos Aires"
 }
 ```
 
@@ -255,13 +255,13 @@ Json Respuesta
 #### Añadir un producto a la tienda 
 ```
 http
-POST /shop/addProduct/{idProducto}
+POST /shop/addProduct/{productId}
 ```
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "precio": "10.5€"
+    "locationId": "E3",
+    "price": "10.5€"
 }
 ```
 Respuesta
@@ -281,7 +281,7 @@ Json Salida
 #### Dar de baja una tienda
 ```
 http
-DELETE /shop/{idShop}
+DELETE /shop/{shopId}
 ```
 
 Salida:
@@ -297,16 +297,16 @@ HTTP/1.1 404 Not found
 #### Actualizar tienda
 ```
 http
-PUT `/shop/{idShop}
+PUT `/shop/{shopId}
 ```
 
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "pais": "España",
-    "ciudad":" A Coruña",
-    "direccion": "Av de Arteixo 6"
+    "locationId": "E3",
+    "country": "España",
+    "city":" A Coruña",
+    "address": "Av de Arteixo 6"
 }
 ```
 Salida:
@@ -331,13 +331,13 @@ Json salida
 #### Actualizar parcialmente la tienda 
 ```
 http
-PATCH /shop/{idShop}
+PATCH /shop/{shopId}
 ```
 Json entrada 
 ```json
 {
-    "id_ubicacion": "E3",
-    "ciudad":" Santiago",
+    "locationId": "E3",
+    "city":" Santiago",
 }
 ```
 Salida:
@@ -356,13 +356,13 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "El campo id_localizacion no existe"
+    "message": "El campo id_ubicaion no existe"
 }
 ```
 #### Actualizar el precio del producto
 ```
 http
-PATCH /shop/{idShop}/products/{idProduct}/price
+PATCH /shop/{shopId}/products/{productId}/price
 ```
 Json entrada
 ```json
@@ -397,27 +397,27 @@ GET /shop?=
 ```
 Ejemplo
 ```
-Get /shop?pais=España&products_min=10
+Get /shop?country=España&products_min=10
 ```
 Json respuesta
 ```json
 [
     {
-        "id": 4,
-        "id_ubicacion": 1,
-        "pais": "España",
-        "ciudad": "Coruña",
-        "direccion": "Av. Finisterre",
-        "Número de productos": 30
+        "shopId": 4,
+        "locationId": 1,
+        "country": "España",
+        "city": "Coruña",
+        "address": "Av. Finisterre",
+        "Number of products": 30
     },
     
     {
-        "id": 6,
-        "id_ubicacion": 1,
-        "pais": "España",
-        "ciudad": "Santiago",
-        "direccion": "Av Orense",
-        "Número de productos": 20
+        "shopId": 6,
+        "locationId": 1,
+        "country": "España",
+        "city": "Santiago",
+        "address": "Av Orense",
+        "Number of products": 20
     }
 ]
 ```
