@@ -104,21 +104,14 @@ Json Respuesta
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 409 Conflict
+HTTP/1.1 400 Bad request
 ```
+
 #### Borrar un producto
 ```
 http
-DELETE /products
+DELETE /products/{idProduct}
 ```
-Json entrada
-
-```json
-{
-    "id": 3
-}
-```
-
 Salida:
 ```
 HTTP/1.1 200 OK
@@ -155,7 +148,7 @@ GET /products
 
 Ejemplo busqueda: 
 ```
-GET /products?name=agua&price_min=9
+GET /products?name=agua&priceMin=9
 ```
 Salida
 ```json
@@ -194,7 +187,15 @@ HTTP/1.1 404 Not found
 ```
 
 ### **Tienda** ###
-**GET `/shop/{idShop}` -Obtener de la tienda  (id, ubicación, Número de  productos )** <br>
+
+
+#### Obtener una tienda por id
+
+```
+http
+GET /shop/{idShop}
+```
+Ejemplo salida
 ```json
 {
     "id_ubicacion": "E3",
@@ -204,13 +205,18 @@ HTTP/1.1 404 Not found
     "Número de productos": 30
 }
 ```
-**Ejemplo  Error**
+Ejemplo  Error
 Salida:
+```
 HTTP/1.1 404 Not found
+```
+#### Crear una tienda
 
+```
+http
+POST `/shop`
+```
 
-**POST `/shop` -Añadir una tienda** <br> 
-Creas un ID para la ubicación. <br> 
 Json entrada 
 ```json
 {
@@ -220,9 +226,16 @@ Json entrada
     "direccion":"Av Buenos Aires"
 }
 ```
-Salida:<br> 
-Status: 201 Created <br> 
-**POST `/shop/addProduct/{idProducto}` -Añadir un producto a una tienda** <br> 
+
+Salida
+```
+Status: 201 Created 
+```
+#### Añadir un producto a la tienda 
+```
+http
+POST /shop/addProduct/{idProducto}
+```
 Json entrada 
 ```json
 {
@@ -231,29 +244,42 @@ Json entrada
 }
 ```
 Salida:
+```
 HTTP/1.1 200 OK
-
-**Ejemplo  Error**
-Salida:
+```
+Ejemplo  Error
+```
 HTTP/1.1 409 Conflict
-
-**DELETE `/shop` -Dar de baja una tienda** <br> 
-Json entrada
+```
+Json Salida 
 ```json
 {
-    "id": "E3"
+    "message": "El campo Coste no existe"
 }
 ```
+#### Dar de baja una tienda
+```
+http
+DELETE /shop/{idShop}
+```
+
 Salida:
+```
 HTTP/1.1 200 OK
+```
 
-**Ejemplo  Error**
+Ejemplo  Error
+
 Salida:
+```
 HTTP/1.1 404 Not found
+```
+#### Actualizar tienda
+```
+http
+PUT `/shop/{idShop}
+```
 
-
-
-**PUT `/shop/{idShop}` -Modificar tienda** <br>
 Json entrada 
 ```json
 {
@@ -264,13 +290,19 @@ Json entrada
 }
 ```
 Salida:
+```
 HTTP/1.1 200 OK
-
-**Ejemplo  Error**
-Salida:
+```
+Ejemplo  Error
+Salida
+```
 HTTP/1.1 404 Not found
-
-**PATCH `/shop/{idShop}` -Modificar tienda** <br>
+```
+#### Actualizar parcialmente la tienda 
+```
+http
+PATCH /shop/{idShop}
+```
 Json entrada 
 ```json
 {
@@ -279,15 +311,20 @@ Json entrada
 }
 ```
 Salida:
+```
 HTTP/1.1 200 OK
-
-**Ejemplo  Error**
-Salida:
+```
+Ejemplo  Error
+Salida
+```
 HTTP/1.1 404 Not found
+```
 
-
-
-**PATCH `/shop/{idShop}/products/{idProduct}/price` -Modificar precio del producto desde cada tienda** <br>
+#### Actualizar el precio del producto
+```
+http
+PATCH /shop/{idShop}/products/{idProduct}/price
+```
 Json entrada
 ```json
 {
@@ -296,17 +333,24 @@ Json entrada
 ```
 
 Salida:
+```
 HTTP/1.1 200 OK
-
-**Ejemplo  Error**
-Salida:
+```
+Ejemplo  Error
+Salida
+```
 HTTP/1.1 404 Not found
-
-
-
-**GET `/shop?=` -Listado ( se puede aplicar filtros )** <br>
+```
+#### Listado con filtros de tiendas 
+```
+http
+GET /shop?=
+```
 Ejemplo
+```
 Get /shop?pais=España&products_min=10
+```
+Json respuesta
 ```json
 [
     {
@@ -329,9 +373,10 @@ Get /shop?pais=España&products_min=10
 ]
 ```
 
-**Ejemplo  Error**
+Ejemplo  Error
 Salida:
+```
 HTTP/1.1 404 Not found
-
+```
 
 
