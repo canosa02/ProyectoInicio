@@ -11,8 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/shop")
 public class ShopController {
-
-    private List<ShopLocation> shops = new ArrayList<>();
+    
     private List<ShopLocation> shopLocations = new ArrayList<>();
 
     public ShopController() {
@@ -33,20 +32,20 @@ public class ShopController {
     }
     @GetMapping("/")
     public List<ShopLocation> getAllShops(){
-        return shops;
+        return shopLocations;
     }
 
     @PostMapping("")
     public String addShop(@RequestBody ShopLocation shopModel){
-        shops.add(shopModel);
+        shopLocations.add(shopModel);
         return "OK";
     }
 
     @DeleteMapping("/{id}")
     public String deleteShop(@PathVariable int id){
-        for(ShopLocation shop : shops){
+        for(ShopLocation shop : shopLocations){
             if(shop.getShopId() == id){
-                shops.remove(shop);
+                shopLocations.remove(shop);
                 return "HTTP/1.1 200 OK";
             }
         }
