@@ -1,6 +1,8 @@
 package com.example.projectProducts.rest;
 
 import com.example.projectProducts.modelo.ProductModel;
+import com.example.projectProducts.modelo.ProductWithShopsDTO;
+import com.example.projectProducts.modelo.ShopInfoDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -15,24 +17,28 @@ public class ProductController {
     public ProductController(){
         products.add(new ProductModel(1,"Pizza con piña"));
         products.add(new ProductModel(2,"Agua"));
-        products.add(new ProductModel(1,"Agua con gas"));
-        products.add(new ProductModel(1,"Naranjas"));
+        products.add(new ProductModel(3,"Agua con gas"));
+        products.add(new ProductModel(4,"Naranjas"));
 
-    }
-
-    @GetMapping("/{id}")
-    public ProductModel getProduct(@PathVariable int id){
-        for(ProductModel product : products){
-            if(product.getProductId() == id){
-                return product;
-            }
-        }
-        return null;
     }
 
     @GetMapping("")
-    public List<ProductModel> getAllProducts() {return products;}
+    public List<ProductWithShopsDTO> getProducts() {
+        List<ProductWithShopsDTO> producto = new ArrayList<>();
 
+        List<ShopInfoDTO> aguaShops = List.of(
+                new ShopInfoDTO(1, "10.5€"),
+                new ShopInfoDTO(2, "9.5$")
+        );
+        producto.add(new ProductWithShopsDTO(2, "Agua", aguaShops));
+
+        List<ShopInfoDTO> pizzaShops = List.of(
+                new ShopInfoDTO(1, "10.5€")
+        );
+        producto.add(new ProductWithShopsDTO(10, "Pizza con piña", pizzaShops));
+
+        return producto;
+    }
     @PostMapping("")
     public String addProduct(@RequestBody ProductModel productModel){
         products.add(productModel);
@@ -40,15 +46,8 @@ public class ProductController {
     }
 
 
-    @DeleteMapping({"/{id}"})
-    public  String deleteProduct(@PathVariable int id){
-        for(ProductModel product : products){
-            if(product.getProductId() == id){
-                products.remove(product);
-                return "HTTP/1.1 200 OK";
-            }
-        }
-        return null;
-    }
+   // @GetMapping("/{id}");
+
+
 
 }

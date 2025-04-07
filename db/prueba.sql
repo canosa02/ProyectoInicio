@@ -53,7 +53,7 @@ INSERT INTO products(name) values
 
 INSERT INTO productPrice (productId, locationId, price) VALUES
 (1, 'A1', 7.9),
-(1, 'A2', 8.9),
+(2, 'A2', 8.9),
 (3, 'E1', 3.9),
 (4, 'F1', 5.5),
 (5, 'P1', 3.2);
