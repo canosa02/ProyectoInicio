@@ -18,11 +18,10 @@ public class ProductController {
     private List<ProductModel> products = new ArrayList<>();
 
     public ProductController(){
-        products.add(new ProductModel(1,"Pizza con piña"));
-        products.add(new ProductModel(2,"Agua"));
-        products.add(new ProductModel(3,"Agua con gas"));
-        products.add(new ProductModel(4,"Naranjas"));
-
+        products.add(new ProductModel("Pizza con piña"));
+        products.add(new ProductModel("Agua"));
+        products.add(new ProductModel("Agua con gas"));
+        products.add(new ProductModel("Naranjas"));
     }
 
     @GetMapping("")
@@ -78,16 +77,14 @@ public class ProductController {
             @RequestParam(required = false) BigDecimal priceMax){
 
         List<ProductWithShopsDTO> product = new ArrayList<>();
-
-        // Producto 1: Agua
+        // Agua
         List<ShopInfoDTO> aguaShops = List.of(
                 new ShopInfoDTO(1, new BigDecimal("9")),
                 new ShopInfoDTO(2, new BigDecimal("8.5")),
                 new ShopInfoDTO(3, new BigDecimal("12"))
         );
         product.add(new ProductWithShopsDTO(2, "Agua", aguaShops));
-
-        // Producto 2: Pizza con piña
+        // Pizza
         List<ShopInfoDTO> pizzaShops = List.of(
                 new ShopInfoDTO(1, new BigDecimal("10.5"))
         );
@@ -101,21 +98,19 @@ public class ProductController {
         // Filtrado por precio mínimo
         if (priceMin != null) {
             for (ProductWithShopsDTO p : product) {
-                // Filtrar solo las tiendas cuyo precio sea mayor o igual al precio mínimo
                 List<ShopInfoDTO> filteredShops = p.getShop().stream()
                         .filter(shop -> shop.getPrice().compareTo(priceMin) >= 0)
                         .collect(Collectors.toList());
 
-                // Si después del filtro quedan tiendas, actualiza el producto con esas tiendas
+                // Actualiza el producto con esas tiendas
                 if (!filteredShops.isEmpty()) {
-                    p.setShop(filteredShops);  // Actualiza la lista de tiendas
+                    p.setShop(filteredShops);
                 } else {
-                    product.remove(p);  // Si no queda ninguna tienda válida, elimina el producto
+                    product.remove(p);
                 }
             }
         }
 
-        // Filtrado por precio máximo (igual que el filtro de precio mínimo)
         if (priceMax != null) {
             for (ProductWithShopsDTO p : product) {
                 // Filtrar solo las tiendas cuyo precio sea menor o igual al precio máximo
@@ -123,11 +118,10 @@ public class ProductController {
                         .filter(shop -> shop.getPrice().compareTo(priceMax) <= 0)
                         .collect(Collectors.toList());
 
-                // Si después del filtro quedan tiendas, actualiza el producto con esas tiendas
                 if (!filteredShops.isEmpty()) {
-                    p.setShop(filteredShops);  // Actualiza la lista de tiendas
+                    p.setShop(filteredShops);
                 } else {
-                    product.remove(p);  // Si no queda ninguna tienda válida, elimina el producto
+                    product.remove(p);
                 }
             }
         }
@@ -137,9 +131,11 @@ public class ProductController {
 
 
     @PostMapping("")
-    public String addProduct(@RequestBody ProductModel productModel){
+    public ProductModel addProduct(@RequestBody ProductModel productModel){
+        productModel.setProductId(ProductModel.getNextId());
         products.add(productModel);
-        return "OK";
+
+        return productModel;
     }
 
 

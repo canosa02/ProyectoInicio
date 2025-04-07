@@ -3,18 +3,21 @@ package com.example.projectProducts.modelo;
 import java.util.List;
 
 public class ProductModel {
-
+    private static int  contador = 1;
     private int productId;
     private String name;
 
     public ProductModel() {
     }
 
-    public ProductModel(int productId, String name) {
-        this.productId = productId;
+    public ProductModel( String name) {
+        this.productId = contador++;
         this.name = name;
     }
 
+    public static int getNextId(){
+        return contador++;
+    }
     public int getProductId() {
         return productId;
     }
