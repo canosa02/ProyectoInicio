@@ -64,7 +64,7 @@ Ejemplo JSON respuesta
 #### Obtener producto por ID  
 ```
 http
-GET /products/{productId}
+GET /product/{productId}
 ```
 Ejemplo JSON respuesta
 ```json
@@ -91,7 +91,7 @@ HTTP/1.1 404 Not found
 #### Añadir un producto
 ```
 http
-POST /products
+POST /product
 ```
 Json entrada
 ```json
@@ -122,7 +122,7 @@ Json Respuesta
 #### Borrar un producto
 ```
 http
-DELETE /products/{productId}
+DELETE /product/{productId}
 ```
 Respuesta:
 ```
@@ -135,7 +135,7 @@ HTTP/1.1 404 Not found
 #### Actualizar producto 
 ```
 http
-PUT `/products/{productId}
+PUT `/product/{productId}
 ```
 
 Json entrada
@@ -242,6 +242,7 @@ POST `/shop`
 Json entrada 
 ```json
 {
+    "shopId": "1",
     "locationId": "E3",
     "country": "España",
     "city": "Santiago",
