@@ -31,10 +31,15 @@ public class ProductController {
         // Producto 1: Agua
         List<ShopInfoDTO> aguaShops = List.of(
                 new ShopInfoDTO(1, new BigDecimal("10.5")),
-                new ShopInfoDTO(2, new BigDecimal("9.5"))
-        );
-        producto.add(new ProductWithShopsDTO(2, "Agua", aguaShops));
+                new ShopInfoDTO(2, new BigDecimal("9.5")),
+                new ShopInfoDTO(3, new BigDecimal("11"))
 
+        );
+        producto.add(new ProductWithShopsDTO(2, "CocaCola", aguaShops));
+        producto.add(new ProductWithShopsDTO(3, "Agua con gas ", aguaShops));
+        producto.add(new ProductWithShopsDTO(4, "Fanta", aguaShops));
+        producto.add(new ProductWithShopsDTO(5, "Limón", aguaShops));
+        producto.add(new ProductWithShopsDTO(6, "Fresa", aguaShops));
         // Producto 2: Pizza con piña
         List<ShopInfoDTO> pizzaShops = List.of(
                 new ShopInfoDTO(1,new BigDecimal("10.5"))
