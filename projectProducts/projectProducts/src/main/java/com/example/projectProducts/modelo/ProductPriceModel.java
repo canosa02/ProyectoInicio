@@ -1,17 +1,18 @@
 package com.example.projectProducts.modelo;
 
 import  java.io.Serializable;
+import java.math.BigDecimal;
 
 public class ProductPriceModel implements  Serializable {
 
     private  int  productId;
     private String locationId;
-    private int price;
+    private BigDecimal price;
 
     public ProductPriceModel() {
     }
 
-    public ProductPriceModel(int price, String locationId, int productId) {
+    public ProductPriceModel(BigDecimal price, String locationId, int productId) {
         this.price = price;
         this.locationId = locationId;
         this.productId = productId;
@@ -25,7 +26,7 @@ public class ProductPriceModel implements  Serializable {
         return locationId;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -33,7 +34,7 @@ public class ProductPriceModel implements  Serializable {
         this.locationId = locationId;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
