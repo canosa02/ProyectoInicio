@@ -2,9 +2,12 @@ package com.example.projectProducts.rest;
 
 
 
+import com.example.projectProducts.modelo.LocationModel;
+import com.example.projectProducts.modelo.ShopLocation;
 import com.example.projectProducts.modelo.ShopModel;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.stream.Location;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +16,7 @@ import java.util.List;
 public class ShopController {
 
     private List<ShopModel> shops = new ArrayList<>();
+    private List<ShopLocation> shopLocations = new ArrayList<>();
 
     public ShopController() {
         shops.add(new ShopModel(1,"A1"));
@@ -20,13 +24,15 @@ public class ShopController {
         shops.add(new ShopModel(3,"E1"));
         shops.add(new ShopModel(4,"F1"));
         shops.add(new ShopModel(5,"P1"));
+        shopLocations.add(new ShopLocation(1, "E2", "España", "A Coruña", "Los Mallos, 10", 40));
+        shopLocations.add(new ShopLocation(2, "A2", "Argentina", "Buenos Aires", "Dirección inventada", 2));
     }
 
     @GetMapping("/{id}")
-    public ShopModel getShop(@PathVariable int id){
-        for(ShopModel shop : shops){
-            if(shop.getShopId() == id){
-                return shop;
+    public ShopLocation getShopLocation(@PathVariable int id){
+        for(ShopLocation shopLocation : shopLocations){
+            if(shopLocation.getShopId() == id){
+                return shopLocation;
             }
         }
 

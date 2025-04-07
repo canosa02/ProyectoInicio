@@ -7,7 +7,7 @@ public class LocationModel implements Serializable {
     private String locationId;
     private String country;
     private String city;
-    private String adress;
+    private String address;
 
     public LocationModel() {
     }
@@ -15,7 +15,7 @@ public class LocationModel implements Serializable {
     public LocationModel(String locationId, String country, String adress, String city) {
         this.locationId = locationId;
         this.country = country;
-        this.adress = adress;
+        this.address = adress;
         this.city = city;
     }
 
@@ -31,16 +31,16 @@ public class LocationModel implements Serializable {
         return city;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
     public void setLocationId(String locationId) {
         this.locationId = locationId;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setCountry(String country) {
@@ -57,7 +57,7 @@ public class LocationModel implements Serializable {
                 "locationId='" + locationId + '\'' +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
-                ", adress='" + adress + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }

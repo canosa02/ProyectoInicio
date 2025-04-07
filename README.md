@@ -214,6 +214,7 @@ GET /shop/{shopId}
 Ejemplo salida
 ```json
 {
+    "shopId": 1,
     "locationId": "E3",
     "country": "España",
     "city": "Coruña",
