@@ -24,7 +24,7 @@ CREATE TABLE shop (
 CREATE TABLE productPrice(
     productId int not null,
     locationId varchar(5) not null,
-    price varchar(15) not null,
+    price bigdecimal not null,
     primary key (productId, locationId),
     FOREIGN KEY (productId) REFERENCES products(productId) ON DELETE CASCADE,
     FOREIGN KEY (locationId) REFERENCES location(locationId) ON DELETE CASCADE
