@@ -34,27 +34,32 @@ GET /products
 Ejemplo JSON respuesta
 ```json
 [
-{
+  {
     "productId": 2,
     "name": "Agua",
-    "shop":{
-        "shopId" : 1,
+    "shop": [
+      {
+        "shopId": 1,
         "price": "10.5€"
-    },
-    "shop":{
-        "shopId" : 2,
+      },
+      {
+        "shopId": 2,
         "price": "9.5$"
-    }
-},
-{
+      }
+    ]
+  },
+  {
     "productId": 10,
     "name": "Pizza con piña",
-    "shop":{
-        "shopId" : 1,
+    "shop": [
+      {
+        "shopId": 1,
         "price": "10.5€"
-    }
-}
+      }
+    ]
+  }
 ]
+
 ```
 #### Obtener producto por ID  
 ```
