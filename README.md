@@ -40,11 +40,11 @@ Ejemplo JSON respuesta
     "shop": [
       {
         "shopId": 1,
-        "price": "10.5€"
+        "price": 10.5
       },
       {
         "shopId": 2,
-        "price": "9.5$"
+        "price": 9.5
       }
     ]
   },
@@ -54,7 +54,7 @@ Ejemplo JSON respuesta
     "shop": [
       {
         "shopId": 1,
-        "price": "10.5€"
+        "price": 10.5
       }
     ]
   }
@@ -71,14 +71,16 @@ Ejemplo JSON respuesta
 {
     "productId": 2,
     "name": "Agua",
-    "shop":{
-        "shopId" : 1,
-        "price": "10.5€"
-    },
-    "shop":{
-        "shopId" : 2,
-        "price": "9.5$"
-    }
+    "shop":[
+        {
+            "shopId" : 1,
+            "price": 10.5
+        },
+        {
+            "shopId" : 2,
+            "price": 9.5
+        }
+    ]
 }
 ```
 Ejemplo  Error
@@ -114,7 +116,7 @@ Json Respuesta
 
 ```json
 {
-    "message": "El campo name no existe"
+    "message": "El campo comida no existe"
 }
 ```
 #### Borrar un producto
@@ -173,27 +175,31 @@ Salida
       {
         "productId": 2,
         "name": "Agua",
-        "shop": {
-          "shopId": 1,
-          "price": "10.5€"
-        },
-        "shop": {
-          "shopId": 2,
-          "price": "9.5€"
-        }
+        "shop": [
+              {
+              "shopId": 1,
+              "price": 10.5
+            },
+            {
+              "shopId": 2,
+              "price": 9.5
+            }
+        ]  
       },
     
     {
         "productId": 4,
         "name": "Agua con gas",
-        "shop":{
-            "shopId" : 1,
-            "price": "14€"
-        },
-        "shop":{
-            "shopId" : 5,
-            "price": "20$"
-        }
+        "shop":[
+            {
+                "shopId" : 1,
+                "price": 14
+            },
+            {
+                "shopId" : 5,
+                "price": 20
+            }
+        ]
     }
 ]
 ```
@@ -267,7 +273,7 @@ Json entrada
 ```json
 {
     "locationId": "E3",
-    "price": "10.5€"
+    "price": 10.5
 }
 ```
 Respuesta
@@ -373,7 +379,7 @@ PATCH /shop/{shopId}/products/{productId}/price
 Json entrada
 ```json
 {
-   "precio" : "14.5€"
+   "precio" : 14.5
 }
 ```
 
