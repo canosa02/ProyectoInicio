@@ -1,23 +1,24 @@
 package com.example.projectProducts.modelo;
 
 public class ShopLocation {
+    private static int contador= 1;
     private int shopId;
     private String locationId;
     private String country;
     private String city;
     private String address;
-    private int numProducts;
-
     public ShopLocation() {
     }
 
-    public ShopLocation(int shopId, String locationId, String country, String city, String address, int numProducts) {
-        this.shopId = shopId;
+    public ShopLocation(String locationId, String country, String city, String address) {
         this.locationId = locationId;
         this.country = country;
         this.city = city;
         this.address = address;
-        this.numProducts = numProducts;
+    }
+
+    public static int getNextId(){
+        return contador++;
     }
 
     public int getShopId() {
@@ -60,11 +61,4 @@ public class ShopLocation {
         this.address = address;
     }
 
-    public int getNumProducts() {
-        return numProducts;
-    }
-
-    public void setNumProducts(int numProducts) {
-        this.numProducts = numProducts;
-    }
 }
