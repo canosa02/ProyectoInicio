@@ -3,6 +3,7 @@ package com.example.projectProducts.rest;
 
 import com.example.projectProducts.modelo.ProductModel;
 import com.example.projectProducts.modelo.ShopLocation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -87,8 +88,30 @@ public class ShopController {
             shops.removeIf(shop -> !shop.getAddress().toLowerCase().contains(address.toLowerCase()));
         }
         return shops;
+    }
+    @PutMapping("/shoplocation/{shopId}")
+    public ResponseEntity<String> updateshop(@PathVariable Long shopId, @RequestBody ShopLocation shopLocation) {
+        for (int i = 0; i < shopLocations.size(); i++) {
+            ShopLocation currentShop = shopLocations.get(i);
+
+            if (currentShop.getShopId() == shopId) {
+
+                if (shopLocation.getLocationId() == null || shopLocation.getCountry() == null ||
+                        shopLocation.getCity() == null || shopLocation.getAddress() == null) {
+                    return ResponseEntity.badRequest().body("HTTP/1.1 400 BAD REQUEST ");
+                }
+                currentShop.setLocationId(shopLocation.getLocationId());
+                currentShop.setCountry(shopLocation.getCountry());
+                currentShop.setCity(shopLocation.getCity());
+                currentShop.setAddress(shopLocation.getAddress());
+
+                return ResponseEntity.ok("HTTP/1.1 200 OK");
+            }
+        }
+        return ResponseEntity.status(404).body("HTTP/1.1 404 NOT FOUND");
 
     }
+
 
 
 }
