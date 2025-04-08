@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("")
@@ -17,7 +16,7 @@ public class ProductController {
 
     private List<ProductModel> products = new ArrayList<>();
     private List<ShopInfoDTO> shopInfoDTOS = new ArrayList<>();
-    private List<ProductNameDTO> productsUpdate = new ArrayList<>();
+    private List<ProductNameDTO> productNameDTOS = new ArrayList<>();
     private List<ProductWithShopsDTO> productWithShopsDTOS = new ArrayList<>();
 
     public ProductController() {
@@ -96,11 +95,11 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    public ProductModel addProduct(@RequestBody ProductNameDTO productModel) {
+    public ProductModel addProduct(@RequestBody ProductNameDTO productNameDTO) {
 
         ProductModel newProduct = new ProductModel();
         newProduct.setProductId(ProductModel.getNextId());
-        newProduct.setName(productModel.getName());
+        newProduct.setName(productNameDTO.getName());
         products.add(newProduct);
 
         return newProduct;
@@ -117,14 +116,14 @@ public class ProductController {
     }
 
     @PutMapping("/product/{productId}") //no funciona pero es acorde a la documentación
-    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productUpdateDTO) {
+    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productNameDTO) {
         for (int i = 0; i < products.size(); i++) {
             ProductModel currentProduct = products.get(i);
             if (currentProduct.getProductId() == productId) {
-                if (productUpdateDTO.getName() == null) {
+                if (productNameDTO.getName() == null) {
                     return ResponseEntity.badRequest().build();
                 }
-                currentProduct.setName(productUpdateDTO.getName());
+                currentProduct.setName(productNameDTO.getName());
                 return ResponseEntity.ok(currentProduct);
             }
         }
