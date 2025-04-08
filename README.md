@@ -83,9 +83,12 @@ Ejemplo JSON respuesta
     ]
 }
 ```
-Ejemplo  Error
+Ejemplo Producto no existente
 ```
-HTTP/1.1 404 Not found
+HTTP/1.1 200 OK
+```
+```json
+[]
 ```
 
 #### Añadir un producto
