@@ -115,13 +115,7 @@ Json Respuesta
 ```
 HTTP/1.1 400 Bad request
 ```
-Json Respuesta
 
-```json
-{
-    "message": "El campo comida no existe"
-}
-```
 #### Borrar un producto
 ```
 http
