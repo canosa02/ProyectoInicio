@@ -373,7 +373,7 @@ Json salida
 #### Actualizar el precio del producto
 ```
 http
-PATCH /shop/{shopId}/products/{productId}/price
+PATCH /shop/{shopId}/product/{productId}
 ```
 Json entrada
 ```json
