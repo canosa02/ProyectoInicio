@@ -2,7 +2,9 @@ package com.example.projectProducts.rest;
 
 
 import com.example.projectProducts.modelo.ProductModel;
+import com.example.projectProducts.modelo.ProductPriceModel;
 import com.example.projectProducts.modelo.ShopLocation;
+import com.example.projectProducts.modelo.ShopProductRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,6 +91,7 @@ public class ShopController {
         }
         return shops;
     }
+
     @PutMapping("/shoplocation/{shopId}")
     public ResponseEntity<String> updateshop(@PathVariable Long shopId, @RequestBody ShopLocation shopLocation) {
         for (int i = 0; i < shopLocations.size(); i++) {
@@ -113,5 +116,37 @@ public class ShopController {
     }
 
 
+    private List<ProductPriceModel> productPrices = new ArrayList<>();
 
+    @PostMapping("/shops/addProduct")
+    public ResponseEntity<String> addProductShop(@RequestBody ProductPriceModel product) {
+        int productId = product.getProductId();
+        String locationId = product.getLocationId();
+        BigDecimal price = product.getPrice();
+
+        if (locationId == null || price == null) {
+            return ResponseEntity.badRequest().body("Missing required fields: locationId or price");
+        }
+
+        if(product.getProductId()<=0){
+            return ResponseEntity.badRequest().body("ProductId must be a number greater than 0");
+        }
+        if (product.getLocationId().trim().isEmpty()) {
+            return ResponseEntity.badRequest().body("LocationId cannot be empty");
+        }
+        if (product.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+            return ResponseEntity.badRequest().body("Price cannot be negative");
+        }
+
+        for (ShopLocation currentShop : shopLocations) {
+            if (currentShop.getLocationId().equals(locationId)) {
+                productPrices.add(product);
+                return ResponseEntity.ok("HTTP/1.1 200 OK");
+            }
+
+            return ResponseEntity.status(404).body("HTTP/1.1 404 NOT FOUND");
+        }
+
+        return ResponseEntity.status(404).body("HTTP/1.1 404 NOT FOUND");
+    }
 }

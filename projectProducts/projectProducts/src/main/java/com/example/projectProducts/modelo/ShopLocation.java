@@ -1,5 +1,7 @@
 package com.example.projectProducts.modelo;
 
+import java.math.BigDecimal;
+
 public class ShopLocation {
     private static int contador= 1;
     private int shopId;
@@ -7,6 +9,7 @@ public class ShopLocation {
     private String country;
     private String city;
     private String address;
+
     public ShopLocation() {
     }
 
