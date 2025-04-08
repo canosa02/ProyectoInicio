@@ -16,7 +16,7 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 - **Alta de tienda** → Permite registrar una nueva .  
 - **Baja de tienda** → Elimina una  existente.  
 - **Modificación de tienda** → Permite actualizar los datos de una tienda.  
-- **Añadir  a tienda** → Asigna un  a una tienda específica.  
+- **Añadir un producto a tienda** → Asigna un  a una tienda específica.  
 - **Filtrar tiendas** → Permite buscar tiendas por **name, país y ubicación**.  
 
 ---
