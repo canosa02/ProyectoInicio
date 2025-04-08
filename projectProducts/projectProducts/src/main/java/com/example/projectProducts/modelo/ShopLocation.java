@@ -14,6 +14,7 @@ public class ShopLocation {
     }
 
     public ShopLocation(String locationId, String country, String city, String address) {
+        this.shopId = contador++;
         this.locationId = locationId;
         this.country = country;
         this.city = city;
