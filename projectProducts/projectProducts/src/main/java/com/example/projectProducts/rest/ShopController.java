@@ -1,10 +1,7 @@
 package com.example.projectProducts.rest;
 
 
-import com.example.projectProducts.modelo.ProductModel;
-import com.example.projectProducts.modelo.ProductPriceModel;
-import com.example.projectProducts.modelo.ProductPriceModelDTO;
-import com.example.projectProducts.modelo.ShopLocation;
+import com.example.projectProducts.modelo.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,10 +47,18 @@ public class ShopController {
 
 
     @PostMapping("/shop")
-    public String addShop(@RequestBody ShopLocation shopModel) {
-        shopModel.setShopId(ShopLocation.getNextId());
-        shopLocations.add(shopModel);
-        return "HTTP/1.1 200 OK";
+    public ShopLocation addShop(@RequestBody ShopAddDTO newShopDTO) {
+
+        ShopLocation newShop = new ShopLocation();
+
+        newShop.setShopId(ShopLocation.getNextId());
+        newShop.setLocationId(newShopDTO.getLocationId());
+        newShop.setCountry(newShopDTO.getCountry());
+        newShop.setCity(newShopDTO.getCity());
+        newShop.setAddress(newShopDTO.getAddress());
+
+        shopLocations.add(newShop);
+        return newShop;
     }
 
     @DeleteMapping("/shop/{id}")
@@ -61,7 +66,7 @@ public class ShopController {
         for (ShopLocation shop : shopLocations) {
             if (shop.getShopId() == id) {
                 shopLocations.remove(shop);
-                return "HTTP/1.1 200 OK";
+
             }
         }
 
