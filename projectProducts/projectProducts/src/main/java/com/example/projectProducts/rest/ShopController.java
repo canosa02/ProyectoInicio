@@ -69,7 +69,7 @@ public class ShopController {
     }
 
 
-    @GetMapping("/shops/filter")
+    @GetMapping("/shop/filter")
     public List<ShopLocation> getShopLocationWithFilters(
             @RequestParam(required = false) String locationId,
             @RequestParam(required = false) String country,

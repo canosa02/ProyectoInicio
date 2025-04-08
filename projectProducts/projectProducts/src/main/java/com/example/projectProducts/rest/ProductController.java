@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private List<ProductModel> products = new ArrayList<>();
-    private List<ProductUpdateDTO> productsUpdate = new ArrayList<>();
     private List<ShopInfoDTO> shopInfoDTOS = new ArrayList<>();
+    private List<ProductNameDTO> productsUpdate = new ArrayList<>();
     private List<ProductWithShopsDTO> productWithShopsDTOS = new ArrayList<>();
 
     public ProductController() {
@@ -65,66 +65,45 @@ public class ProductController {
             @RequestParam(required = false) BigDecimal priceMin,
             @RequestParam(required = false) BigDecimal priceMax) {
 
-        List<ProductWithShopsDTO> product = new ArrayList<>();
-        // Agua
-        List<ShopInfoDTO> aguaShops = List.of(
-                new ShopInfoDTO(1, new BigDecimal("9")),
-                new ShopInfoDTO(2, new BigDecimal("8.5")),
-                new ShopInfoDTO(3, new BigDecimal("12"))
-        );
-        product.add(new ProductWithShopsDTO(2, "Agua", aguaShops));
-        // Pizza
-        List<ShopInfoDTO> pizzaShops = List.of(
-                new ShopInfoDTO(1, new BigDecimal("10.5"))
-        );
-        product.add(new ProductWithShopsDTO(10, "Pizza con piña", pizzaShops));
+        List<ProductWithShopsDTO> filteredProducts = new ArrayList<>();
 
-        // Filtrado por nombre
+
+        for (ProductModel product : products) {
+            List<ShopInfoDTO> filteredShops = new ArrayList<>(shopInfoDTOS);
+
+            if (priceMin != null) {
+                filteredShops.removeIf(shop -> shop.getPrice().compareTo(priceMin) < 0);
+            }
+
+            if (priceMax != null) {
+                filteredShops.removeIf(shop -> shop.getPrice().compareTo(priceMax) > 0);
+            }
+
+            if (!filteredShops.isEmpty()) {
+                filteredProducts.add(new ProductWithShopsDTO(
+                        product.getProductId(),
+                        product.getName(),
+                        filteredShops
+                ));
+            }
+        }
         if (name != null) {
-            product.removeIf(p -> !p.getName().toLowerCase().contains(name.toLowerCase()));
+            filteredProducts.removeIf(p -> !p.getName().toLowerCase().contains(name.toLowerCase()));
         }
 
-        // Filtrado por precio mínimo
-        if (priceMin != null) {
-            for (ProductWithShopsDTO p : product) {
-                List<ShopInfoDTO> filteredShops = p.getShop().stream()
-                        .filter(shop -> shop.getPrice().compareTo(priceMin) >= 0)
-                        .collect(Collectors.toList());
-
-                // Actualiza el producto con esas tiendas
-                if (!filteredShops.isEmpty()) {
-                    p.setShop(filteredShops);
-                } else {
-                    product.remove(p);
-                }
-            }
-        }
-
-        if (priceMax != null) {
-            for (ProductWithShopsDTO p : product) {
-                // Filtrar solo las tiendas cuyo precio sea menor o igual al precio máximo
-                List<ShopInfoDTO> filteredShops = p.getShop().stream()
-                        .filter(shop -> shop.getPrice().compareTo(priceMax) <= 0)
-                        .collect(Collectors.toList());
-
-                if (!filteredShops.isEmpty()) {
-                    p.setShop(filteredShops);
-                } else {
-                    product.remove(p);
-                }
-            }
-        }
-
-        return product;
+        return filteredProducts;
     }
 
 
     @PostMapping("/product")
-    public ProductModel addProduct(@RequestBody ProductModel productModel) {
-        productModel.setProductId(ProductModel.getNextId());
-        products.add(productModel);
+    public ProductModel addProduct(@RequestBody ProductNameDTO productModel) {
 
-        return productModel;
+        ProductModel newProduct = new ProductModel();
+        newProduct.setProductId(ProductModel.getNextId());
+        newProduct.setName(productModel.getName());
+        products.add(newProduct);
+
+        return newProduct;
     }
 
 
@@ -138,7 +117,7 @@ public class ProductController {
     }
 
     @PutMapping("/product/{productId}") //no funciona pero es acorde a la documentación
-    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductUpdateDTO productUpdateDTO) {
+    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productUpdateDTO) {
         for (int i = 0; i < products.size(); i++) {
             ProductModel currentProduct = products.get(i);
             if (currentProduct.getProductId() == productId) {

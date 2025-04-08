@@ -1,12 +1,12 @@
 package com.example.projectProducts.modelo;
 
-public class ProductUpdateDTO {
+public class ProductNameDTO {
     private String name;
 
-    public ProductUpdateDTO(){
+    public ProductNameDTO(){
 
     }
-    public ProductUpdateDTO(String name){
+    public ProductNameDTO(String name){
         this.name = name;
     }
 
