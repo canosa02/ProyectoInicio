@@ -162,12 +162,12 @@ Json Respuesta
 #### Filtro de productos
 ```
 http
-GET /products
+GET /products/filter?=
 ```
 
 Ejemplo busqueda: 
 ```
-GET /products?name=agua&priceMin=9
+GET /product/filter?name=agua&priceMin=9
 ```
 Salida
 ```json
@@ -407,11 +407,11 @@ Json salida
 #### Listado con filtros de tiendas 
 ```
 http
-GET /shop?=
+GET /shop/filter?=
 ```
 Ejemplo
 ```
-Get /shop?country=España&products_min=10
+Get /shop/filter?country=España&products_min=10
 ```
 Json respuesta
 ```json

@@ -125,6 +125,7 @@ public class ProductController {
                     return ResponseEntity.badRequest().build();
                 }
                 currentProduct.setName(productUpdateDTO.getName());
+                return ResponseEntity.ok(currentProduct);
             }
         }
         return ResponseEntity.notFound().build();
