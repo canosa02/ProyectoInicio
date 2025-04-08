@@ -112,18 +112,16 @@ public class ProductController {
         return ResponseEntity.ok(newProduct);
     }
 
-
-    @DeleteMapping({"/product/{productId}"})
+    @DeleteMapping("/product/{productId}")
     public ResponseEntity<String> deleteProduct(@PathVariable int productId) {
-        for (ProductModel product : products) {
-            if (product.getProductId() == productId) {
-                products.remove(product);
-                return ResponseEntity.ok().build();
-            }
-        }
-        return ResponseEntity.notFound().build();
-    }
+        boolean removed = products.removeIf(product -> product.getProductId() == productId);
 
+        if (removed) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(404).build();
+        }
+    }
 
     @PutMapping("/product/{productId}")
     public ResponseEntity<Object> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productNameDTO) {
