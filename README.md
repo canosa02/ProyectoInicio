@@ -268,11 +268,12 @@ Json Respuesta
 #### Añadir un producto a la tienda 
 ```
 http
-POST /shop/addProduct/{productId}
+POST /shop/addProduct
 ```
 Json entrada 
 ```json
 {
+    "productId" : 1,
     "locationId": "E3",
     "price": 10.5
 }
