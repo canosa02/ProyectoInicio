@@ -125,9 +125,31 @@ public class ShopController {
 
     }
 
+    @PatchMapping("/shop/{shopId}")
+    public ResponseEntity<String> partialUpdateShop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO){
+        for(ShopLocation shop : shopLocations) {
+            if (shop.getShopId() == shopId){
+                if (updateShopDTO.getLocationId() != null){
+                    shop.setLocationId(updateShopDTO.getLocationId());
+                }
+                if (updateShopDTO.getCountry() != null){
+                    shop.setCountry(updateShopDTO.getCountry());
+                }
+                if (updateShopDTO.getCity() != null){
+                    shop.setCity(updateShopDTO.getCity());
+                }
+                if (updateShopDTO.getAddress() != null){
+                    shop.setAddress(updateShopDTO.getAddress());
+                }
+                return ResponseEntity.ok().build();
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+
 
     @PostMapping("/shop/addProduct/{productId}")
-    public ResponseEntity<String> addProductShop(@PathVariable int productId,@RequestBody ProductPriceModelDTO product) {
+    public ResponseEntity<String> addProductShop(@PathVariable int productId, @RequestBody ProductPriceModelDTO product) {
         String locationId = product.getLocationId();
         BigDecimal price = product.getPrice();
 
@@ -136,13 +158,13 @@ public class ShopController {
         }
 
         if (productId <= 0) {
-            return ResponseEntity.badRequest().body("LocationId is empty");
+            return ResponseEntity.badRequest().body("ProductId can't be negative");
         }
         if (locationId.trim().isEmpty()) {
             return ResponseEntity.badRequest().body("LocationId is empty");
         }
         if (price.compareTo(BigDecimal.ZERO) < 0) {
-            return ResponseEntity.badRequest().body("The price cannot be negative");
+            return ResponseEntity.badRequest().body("The price can't be negative");
         }
 
 
@@ -164,7 +186,7 @@ public class ShopController {
             }
         }
 
-        return ResponseEntity.badRequest().body("Lasdfasdf");
+        return ResponseEntity.badRequest().body("That field does not exists");
 
     }
 
