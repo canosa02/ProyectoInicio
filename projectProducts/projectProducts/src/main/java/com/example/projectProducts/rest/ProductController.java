@@ -98,10 +98,10 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    public ResponseEntity<ProductModel> addProduct(@RequestBody ProductNameDTO productNameDTO) {
-
+    public ResponseEntity<Object> addProduct(@RequestBody ProductNameDTO productNameDTO) {
+        String error= "That field does not exist";
         if (productNameDTO.getName() == null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(error);
         }
 
         ProductModel newProduct = new ProductModel();
@@ -114,12 +114,14 @@ public class ProductController {
 
 
     @DeleteMapping({"/product/{productId}"})
-    public void deleteProduct(@PathVariable int id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable int productId) {
         for (ProductModel product : products) {
-            if (product.getProductId() == id) {
+            if (product.getProductId() == productId) {
                 products.remove(product);
             }
+
         }
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/product/{productId}") //no funciona pero es acorde a la documentación
