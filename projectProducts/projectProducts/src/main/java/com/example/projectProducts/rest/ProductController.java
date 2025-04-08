@@ -1,6 +1,9 @@
 package com.example.projectProducts.rest;
 
-import com.example.projectProducts.modelo.*;
+import com.example.projectProducts.modelo.ProductModel;
+import com.example.projectProducts.modelo.ProductNameDTO;
+import com.example.projectProducts.modelo.ProductWithShopsDTO;
+import com.example.projectProducts.modelo.ShopInfoDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +11,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("")
@@ -36,7 +38,7 @@ public class ProductController {
     public List<ProductWithShopsDTO> getProductsWithShops() {
         List<ProductWithShopsDTO> producto = new ArrayList<>();
 
-        for(ProductModel productModel : products) {
+        for (ProductModel productModel : products) {
             producto.add(new ProductWithShopsDTO(productModel.getProductId(), productModel.getName(), shopInfoDTOS));
         }
 
@@ -96,14 +98,18 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    public ProductModel addProduct(@RequestBody ProductNameDTO productModel) {
+    public ResponseEntity<ProductModel> addProduct(@RequestBody ProductNameDTO productNameDto) {
+
+        if (productNameDto.getName() == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         ProductModel newProduct = new ProductModel();
         newProduct.setProductId(ProductModel.getNextId());
-        newProduct.setName(productModel.getName());
+        newProduct.setName(productNameDto.getName());
         products.add(newProduct);
 
-        return newProduct;
+        return ResponseEntity.ok(newProduct);
     }
 
 
