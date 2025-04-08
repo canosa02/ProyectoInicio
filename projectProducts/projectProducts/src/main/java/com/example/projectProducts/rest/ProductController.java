@@ -98,15 +98,15 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    public ResponseEntity<ProductModel> addProduct(@RequestBody ProductNameDTO productNameDto) {
+    public ResponseEntity<ProductModel> addProduct(@RequestBody ProductNameDTO productNameDTO) {
 
-        if (productNameDto.getName() == null) {
+        if (productNameDTO.getName() == null) {
             return ResponseEntity.badRequest().build();
         }
 
         ProductModel newProduct = new ProductModel();
         newProduct.setProductId(ProductModel.getNextId());
-        newProduct.setName(productNameDto.getName());
+        newProduct.setName(productNameDTO.getName());
         products.add(newProduct);
 
         return ResponseEntity.ok(newProduct);
@@ -123,14 +123,14 @@ public class ProductController {
     }
 
     @PutMapping("/product/{productId}") //no funciona pero es acorde a la documentación
-    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productUpdateDTO) {
+    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productNameDTO) {
         for (int i = 0; i < products.size(); i++) {
             ProductModel currentProduct = products.get(i);
             if (currentProduct.getProductId() == productId) {
-                if (productUpdateDTO.getName() == null) {
+                if (productNameDTO.getName() == null) {
                     return ResponseEntity.badRequest().build();
                 }
-                currentProduct.setName(productUpdateDTO.getName());
+                currentProduct.setName(productNameDTO.getName());
                 return ResponseEntity.ok(currentProduct);
             }
         }
