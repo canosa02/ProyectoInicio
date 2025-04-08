@@ -1,12 +1,12 @@
 package com.example.projectProducts.rest;
 
-import com.example.projectProducts.modelo.ProductModel;
-import com.example.projectProducts.modelo.ProductWithShopsDTO;
-import com.example.projectProducts.modelo.ShopInfoDTO;
+import com.example.projectProducts.modelo.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,63 +16,47 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private List<ProductModel> products = new ArrayList<>();
+    private List<ProductUpdateDTO> productsUpdate = new ArrayList<>();
+    private List<ShopInfoDTO> shopInfoDTOS = new ArrayList<>();
+    private List<ProductWithShopsDTO> productWithShopsDTOS = new ArrayList<>();
 
     public ProductController() {
         products.add(new ProductModel("Pizza con piña"));
         products.add(new ProductModel("Agua"));
         products.add(new ProductModel("Agua con gas"));
         products.add(new ProductModel("Naranjas"));
+
+        shopInfoDTOS.add(new ShopInfoDTO(1, new BigDecimal("10.5")));
+        shopInfoDTOS.add(new ShopInfoDTO(2, new BigDecimal("9.5")));
+        shopInfoDTOS.add(new ShopInfoDTO(3, new BigDecimal("11")));
+        shopInfoDTOS.add(new ShopInfoDTO(4, new BigDecimal("10")));
     }
 
     @GetMapping("/products")
     public List<ProductWithShopsDTO> getProductsWithShops() {
         List<ProductWithShopsDTO> producto = new ArrayList<>();
 
-        // Producto 1: Agua
-        List<ShopInfoDTO> aguaShops = List.of(
-                new ShopInfoDTO(1, new BigDecimal("10.5")),
-                new ShopInfoDTO(2, new BigDecimal("9.5")),
-                new ShopInfoDTO(3, new BigDecimal("11"))
-
-        );
-        producto.add(new ProductWithShopsDTO(2, "CocaCola", aguaShops));
-        producto.add(new ProductWithShopsDTO(3, "Agua con gas ", aguaShops));
-        producto.add(new ProductWithShopsDTO(4, "Fanta", aguaShops));
-        producto.add(new ProductWithShopsDTO(5, "Limón", aguaShops));
-        producto.add(new ProductWithShopsDTO(6, "Fresa", aguaShops));
-        // Producto 2: Pizza con piña
-        List<ShopInfoDTO> pizzaShops = List.of(
-                new ShopInfoDTO(1, new BigDecimal("10.5"))
-        );
-        producto.add(new ProductWithShopsDTO(10, "Pizza con piña", pizzaShops));
+        for(ProductModel productModel : products) {
+            producto.add(new ProductWithShopsDTO(productModel.getProductId(), productModel.getName(), shopInfoDTOS));
+        }
 
         return producto;
     }
 
 
-    @GetMapping("/product/{id}")
-    public List<ProductWithShopsDTO> getProductsWithid(@PathVariable("id") Integer id) {
-        List<ProductWithShopsDTO> producto = new ArrayList<>();
+    @GetMapping("/product/{productId}")
+    public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
 
-        // Producto 1: Agua
-        List<ShopInfoDTO> aguaShops = List.of(
-                new ShopInfoDTO(1, new BigDecimal("8.5")),
-                new ShopInfoDTO(2, new BigDecimal("10.5"))
-        );
-        producto.add(new ProductWithShopsDTO(2, "Agua", aguaShops));
-
-        // Producto 2: Pizza con piña
-        List<ShopInfoDTO> pizzaShops = List.of(
-                new ShopInfoDTO(1, new BigDecimal("10.5")
+        for (ProductModel productModel : products) {
+            if (Integer.valueOf(productModel.getProductId()).equals(productId)) {
+                return List.of(new ProductWithShopsDTO(
+                        productModel.getProductId(),
+                        productModel.getName(),
+                        shopInfoDTOS
                 ));
-        producto.add(new ProductWithShopsDTO(10, "Pizza con piña", pizzaShops));
-
-        for (ProductWithShopsDTO p : producto) {
-            if (p.getProductId() == id) {
-                return List.of(p); // Retornar solo el producto con el id solicitado
             }
         }
-        return new ArrayList<>(); // Si no se encuentra, devolver todos los productos
+        return Collections.emptyList();
     }
 
     @GetMapping("/product/filter")
@@ -144,15 +128,27 @@ public class ProductController {
     }
 
 
-    @DeleteMapping({"/product/{id}"})
-    public String deleteProduct(@PathVariable int id) {
+    @DeleteMapping({"/product/{productId}"})
+    public void deleteProduct(@PathVariable int id) {
         for (ProductModel product : products) {
             if (product.getProductId() == id) {
                 products.remove(product);
-                return "HTTP/1.1 200 OK";
             }
         }
-        return null;
     }
 
+    @PutMapping("/product/{productId}") //no funciona pero es acorde a la documentación
+    public ResponseEntity<ProductModel> updateProducts(@PathVariable int productId, @RequestBody ProductUpdateDTO productUpdateDTO) {
+        for (int i = 0; i < products.size(); i++) {
+            ProductModel currentProduct = products.get(i);
+            if (currentProduct.getProductId() == productId) {
+                if (productUpdateDTO.getName() == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                currentProduct.setName(productUpdateDTO.getName());
+                return ResponseEntity.ok(currentProduct);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
