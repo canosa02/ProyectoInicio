@@ -113,17 +113,16 @@ public class ProductController {
     }
 
 
-    @DeleteMapping("/product/{productId}")
+    @DeleteMapping({"/product/{productId}"})
     public ResponseEntity<String> deleteProduct(@PathVariable int productId) {
-        boolean removed = products.removeIf(product -> product.getProductId() == productId);
-
-        if (removed) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.status(404).build();
+        for (ProductModel product : products) {
+            if (product.getProductId() == productId) {
+                products.remove(product);
+                return ResponseEntity.ok().build();
+            }
         }
+        return ResponseEntity.notFound().build();
     }
-
 
 
     @PutMapping("/product/{productId}")
