@@ -35,14 +35,14 @@ public class ShopController {
     }
 
     @GetMapping("/shop/{id}")
-    public ShopLocation getShopLocation(@PathVariable int id) {
+    public ResponseEntity<ShopLocation>  getShopLocation(@PathVariable int id) {
         for (ShopLocation shopLocation : shopLocations) {
             if (shopLocation.getShopId() == id) {
-                return shopLocation;
+                return  ResponseEntity.ok(shopLocation);
             }
         }
 
-        return null;
+        return ResponseEntity.notFound().build();
     }
 
 
@@ -61,17 +61,18 @@ public class ShopController {
         return newShop;
     }
 
-    @DeleteMapping("/shop/{id}")
-    public String deleteShop(@PathVariable int id) {
-        for (ShopLocation shop : shopLocations) {
-            if (shop.getShopId() == id) {
-                shopLocations.remove(shop);
+    @DeleteMapping("/shop/{shopId}")
+    public ResponseEntity<String> deleteShop(@PathVariable int shopId) {
+        boolean removed = shopLocations.removeIf(shop -> shop.getShopId() == shopId);
 
-            }
+        if (removed) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.status(404).build();
         }
-
-        return null;
     }
+
+
 
 
     @GetMapping("/shop/filter")
@@ -137,7 +138,7 @@ public class ShopController {
         }
 
         if (productId <= 0) {
-            return ResponseEntity.badRequest().body("LocationId is empty");
+            return ResponseEntity.badRequest().body("ProductId cannot be negative");
         }
         if (locationId.trim().isEmpty()) {
             return ResponseEntity.badRequest().body("LocationId is empty");
@@ -165,7 +166,7 @@ public class ShopController {
             }
         }
 
-        return ResponseEntity.badRequest().body("Lasdfasdf");
+        return ResponseEntity.badRequest().body("Aqui");
 
     }
 
