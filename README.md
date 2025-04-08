@@ -263,14 +263,14 @@ Json Respuesta
 }
 ```
 #### Añadir un producto a la tienda 
+
 ```
 http
-POST /shop/addProduct
+POST /shop/addProduct/{productId}
 ```
 Json entrada 
 ```json
 {
-    "productId" : 1,
     "locationId": "E3",
     "price": 10.5
 }
@@ -286,7 +286,7 @@ HTTP/1.1 400 Bad request
 Json Salida 
 ```json
 {
-    "message": "El campo Coste no existe"
+    "message": "The product alredy exists"
 }
 ```
 #### Dar de baja una tienda
