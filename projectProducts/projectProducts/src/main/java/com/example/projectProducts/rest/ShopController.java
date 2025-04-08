@@ -34,10 +34,10 @@ public class ShopController {
         return shopLocations;
     }
 
-    @GetMapping("/shop/{id}")
-    public ResponseEntity<ShopLocation>  getShopLocation(@PathVariable int id) {
+    @GetMapping("/shop/{shopId}")
+    public ResponseEntity<ShopLocation>  getShopLocation(@PathVariable int shopId) {
         for (ShopLocation shopLocation : shopLocations) {
-            if (shopLocation.getShopId() == id) {
+            if (shopLocation.getShopId() == shopId) {
                 return  ResponseEntity.ok(shopLocation);
             }
         }
@@ -73,8 +73,6 @@ public class ShopController {
     }
 
 
-
-
     @GetMapping("/shop/filter")
     public List<ShopLocation> getShopLocationWithFilters(
             @RequestParam(required = false) String locationId,
@@ -105,25 +103,25 @@ public class ShopController {
     }
 
     @PutMapping("/shop/{shopId}")
-    public ResponseEntity<String> updateshop(@PathVariable int shopId, @RequestBody ShopLocation shopLocation) {
+    public ResponseEntity<Object> updateshop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO) {
         for (int i = 0; i < shopLocations.size(); i++) {
             ShopLocation currentShop = shopLocations.get(i);
 
             if (currentShop.getShopId() == shopId) {
 
-                if (shopLocation.getLocationId() == null || shopLocation.getCountry() == null ||
-                        shopLocation.getCity() == null || shopLocation.getAddress() == null) {
-                    return ResponseEntity.badRequest().body("HTTP/1.1 400 BAD REQUEST ");
+                if (updateShopDTO.getLocationId() == null || updateShopDTO.getCountry() == null ||
+                        updateShopDTO.getCity() == null || updateShopDTO.getAddress() == null) {
+                    return ResponseEntity.badRequest().body("The fields cannot be empty");
                 }
-                currentShop.setLocationId(shopLocation.getLocationId());
-                currentShop.setCountry(shopLocation.getCountry());
-                currentShop.setCity(shopLocation.getCity());
-                currentShop.setAddress(shopLocation.getAddress());
+                currentShop.setLocationId(updateShopDTO.getLocationId());
+                currentShop.setCountry(updateShopDTO.getCountry());
+                currentShop.setCity(updateShopDTO.getCity());
+                currentShop.setAddress(updateShopDTO.getAddress());
 
-                return ResponseEntity.ok("HTTP/1.1 200 OK");
+                return ResponseEntity.ok(currentShop);
             }
         }
-        return ResponseEntity.status(404).body("HTTP/1.1 404 NOT FOUND");
+        return ResponseEntity.status(404).build();
 
     }
 
@@ -138,7 +136,7 @@ public class ShopController {
         }
 
         if (productId <= 0) {
-            return ResponseEntity.badRequest().body("ProductId cannot be negative");
+            return ResponseEntity.badRequest().body("LocationId is empty");
         }
         if (locationId.trim().isEmpty()) {
             return ResponseEntity.badRequest().body("LocationId is empty");
@@ -166,7 +164,7 @@ public class ShopController {
             }
         }
 
-        return ResponseEntity.badRequest().body("Aqui");
+        return ResponseEntity.badRequest().body("Lasdfasdf");
 
     }
 
