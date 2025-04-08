@@ -286,7 +286,7 @@ HTTP/1.1 400 Bad request
 Json Salida 
 ```json
 {
-    "message": "El campo Coste no existe"
+    "message": "The product alredy exists"
 }
 ```
 #### Dar de baja una tienda
