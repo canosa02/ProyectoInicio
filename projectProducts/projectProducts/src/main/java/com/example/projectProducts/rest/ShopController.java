@@ -137,6 +137,28 @@ public class ShopController {
 
     }
 
+    @PatchMapping("/shop/{shopId}") //no se como meter un badRequest aquí
+    public ResponseEntity<String> partialUpdateShop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO){
+        for(ShopLocation shop : shopLocations) {
+            if (shop.getShopId() == shopId){
+                if (updateShopDTO.getLocationId() != null){
+                    shop.setLocationId(updateShopDTO.getLocationId());
+                }
+                if (updateShopDTO.getCountry() != null){
+                    shop.setCountry(updateShopDTO.getCountry());
+                }
+                if (updateShopDTO.getCity() != null){
+                    shop.setCity(updateShopDTO.getCity());
+                }
+                if (updateShopDTO.getAddress() != null){
+                    shop.setAddress(updateShopDTO.getAddress());
+                }
+                return ResponseEntity.ok().build();
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+
 
     @PostMapping("/shop/addProduct/{productId}")
     public ResponseEntity<Object> addProductShop(@PathVariable int productId, @RequestBody AddProductShopDTO product) {
