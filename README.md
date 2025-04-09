@@ -154,7 +154,7 @@ HTTP/1.1 200 OK
 
     {
     "productId":1,
-    "name": "Pizza con piña"
+    "name": "Pizza con piña y chocolate"
 }
 ```
 **Ejemplo  Error**
