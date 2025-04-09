@@ -142,7 +142,7 @@ public class ShopController {
     public ResponseEntity<Object> addProductShop(@PathVariable int productId,@RequestBody ProductPriceModelDTO product) {
         String locationId = product.getLocationId();
         BigDecimal price = product.getPrice();
-
+        boolean found = false;
         if (locationId == null || price == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -160,10 +160,21 @@ public class ShopController {
 
         for(ProductPriceModel productsList : productPrices ){
             if(productId == productsList.getProductId()){
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("That product alredy exists");
-
+                found=true;
             }
         }
+        if(!found){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product does not exist");
+        }
+
+        boolean alreadyAdded = productPrices.stream()
+                .anyMatch(p -> p.getProductId() == productId && p.getLocationId().equals(locationId));
+
+        if (alreadyAdded) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("This product already exists in that shop");
+        }
+
+
 
         for (ShopLocation currentShop : shopLocations) {
             if (currentShop.getLocationId().equals(product.getLocationId())) {
@@ -181,6 +192,9 @@ public class ShopController {
         return ResponseEntity.notFound().build();
 
     }
+
+
+
 
 }
 
