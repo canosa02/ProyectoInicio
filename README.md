@@ -426,7 +426,11 @@ Salida:
 HTTP/1.1 200 OK
 ```
 ```json
-
+ "shopId": 5,
+    "locationId": "E3",
+    "country": "España",
+    "city": "A Coruña",
+    "address": "Los Mallos, 12"
 ```
 Ejemplo  Error
 Salida
@@ -481,7 +485,7 @@ GET /shop/filter?=
 ```
 Ejemplo
 ```
-Get /shop/filter?country=España&products_min=10
+GET /shop/filter?country=España&products_min=10
 ```
 Json respuesta
 ```json
