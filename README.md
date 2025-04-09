@@ -9,7 +9,7 @@ Este proyecto proporciona una API REST para la gestión de productos y tiendas. 
 - **Alta de productos** → Permite añadir nuevos productos a la base de datos.  
 - **Baja de productos** → Elimina un producto de la base de datos.  
 - **Modificación de productos** → Permite modificar los valores de un producto.  
-- **Filtrar productos** → Permite buscar productos por **name** y **precio**.  
+- **Filtrar productos** → Permite buscar productos por **name** y **price**.  
 
 
 ### 🏬 Tienda  
@@ -286,7 +286,7 @@ HTTP/1.1 400 Bad request
 Json Salida 
 ```json
 {
-    "message": "El campo Coste no existe"
+    "message": "The product alredy exists"
 }
 ```
 #### Dar de baja una tienda
@@ -378,7 +378,7 @@ PATCH /shop/{shopId}/product/{productId}
 Json entrada
 ```json
 {
-   "precio" : 14.5
+   "price" : 14.5
 }
 ```
 
