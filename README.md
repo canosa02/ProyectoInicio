@@ -113,11 +113,12 @@ Json Respuesta
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 409 Conflict
+HTTP/1.1 400 Conflict
 ```
 
 ```json
-  "message": "That product alredy exists"
+  "message": "The field doesn`t exist"
+
 ```
 
 #### Borrar un producto
@@ -153,7 +154,7 @@ HTTP/1.1 200 OK
 
     {
     "productId":1,
-    "name": "Pizza con piña"
+    "name": "Pizza con piña y chocolate"
 }
 ```
 **Ejemplo  Error**
@@ -212,11 +213,13 @@ Salida
 ]
 ```
 
-Ejemplo  Error
+Ejemplo  Sin productos
 ```
-HTTP/1.1 404 Not found
+HTTP/1.1 200 OK
 ```
-
+```json
+[]
+```
 ### **Tienda** ###
 #### Obtener todas las tiendas
 
@@ -430,7 +433,7 @@ HTTP/1.1 200 OK
   "shopId": 5,
   "locationId": "E3",
   "country": "España",
-  "city": "A Coruña",
+  "city": "Santiago",
   "address": "Los Mallos, 12"
 }
 ```

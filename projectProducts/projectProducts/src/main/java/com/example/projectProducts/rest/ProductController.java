@@ -92,14 +92,20 @@ public class ProductController {
             filteredProducts.removeIf(p -> !p.getName().toLowerCase().contains(name.toLowerCase()));
         }
 
-        return filteredProducts;
+        if (filteredProducts.isEmpty()){
+            return Collections.emptyList();
+
+        }else{
+            return filteredProducts;
+        }
+
     }
 
 
     @PostMapping("/product")
     public ResponseEntity<Object> addProduct(@RequestBody ProductNameDTO productNameDTO) {
         if (productNameDTO.getName() == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("That field does not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("That field does not exist");
         }
 
         ProductModel newProduct = new ProductModel();
