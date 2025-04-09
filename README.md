@@ -212,7 +212,38 @@ HTTP/1.1 404 Not found
 ```
 
 ### **Tienda** ###
+#### Obtener todas las tiendas
 
+```
+http
+GET /shops
+```
+Ejemplo salida
+```json
+[
+    {
+        "shopId": 1,
+        "locationId": "E2",
+        "country": "España",
+        "city": "A Coruña",
+        "address": "Los Mallos, 10"
+    },
+    {
+        "shopId": 2,
+        "locationId": "A2",
+        "country": "Argentina",
+        "city": "Buenos Aires",
+        "address": "Dirección inventada"
+    },
+    {
+        "shopId": 3,
+        "locationId": "E3",
+        "country": "España",
+        "city": "Santiago",
+        "address": "Av. Toledo"
+    }
+]
+```
 #### Obtener una tienda por id
 
 ```
@@ -229,9 +260,13 @@ Ejemplo salida
     "address": "Av. Finisterre"
 }
 ```
-Ejemplo  Error
+Ejemplo si no encuentra tiendas
 ```
-HTTP/1.1 404 Not found
+HTTP/1.1 200 OK
+```
+
+```json
+[]
 ```
 #### Crear una tienda
 
