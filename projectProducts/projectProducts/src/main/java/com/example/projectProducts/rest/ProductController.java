@@ -99,7 +99,7 @@ public class ProductController {
     @PostMapping("/product")
     public ResponseEntity<Object> addProduct(@RequestBody ProductNameDTO productNameDTO) {
         if (productNameDTO.getName() == null) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("That field does not exist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("That field does not exist");
         }
 
         ProductModel newProduct = new ProductModel();
