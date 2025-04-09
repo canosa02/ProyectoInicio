@@ -104,16 +104,21 @@ Json entrada
 ```
 
 Json Respuesta
-
 ```json
-{
-    "productId": 10,
-    "name": "Pizza con piña"
+
+    {
+    "productId": 5,
+    "locationId": "E2",
+    "price": 22.5
 }
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 400 Bad request
+HTTP/1.1 409 Conflict
+```
+
+```json
+  "message": "That product alredy exists"
 ```
 
 #### Borrar un producto
@@ -259,7 +264,7 @@ Status: 201 Created
 ```
 **Ejemplo error**
 ```
-HTTP/1.1 400 Bad request
+HTTP/1.1 409 Bad Request
 ```
 Json Respuesta
 
@@ -285,9 +290,16 @@ Respuesta
 ```
 HTTP/1.1 200 OK
 ```
+```json
+{
+    "productId" : 1,
+    "locationId": "E3",
+    "price": 10.5
+}
+```
 **Ejemplo  Error**
 ```
-HTTP/1.1 400 Bad request
+HTTP/1.1 409 Bad Request
 ```
 Json Salida 
 ```json
@@ -330,6 +342,17 @@ Salida:
 ```
 HTTP/1.1 200 OK
 ```
+
+```json
+{
+    "shopId": 5,
+    "locationId": "C9",
+    "country": "Colombia",
+    "city": "A Coruña",
+    "address": "Los Mallos, 12"
+}
+```
+
 Ejemplo  Error
 Salida
 ```
