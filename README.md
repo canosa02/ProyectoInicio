@@ -221,8 +221,7 @@ Ejemplo salida
     "locationId": "E3",
     "country": "España",
     "city": "Coruña",
-    "address": "Av. Finisterre",
-    "Number of products": 30
+    "address": "Av. Finisterre"
 }
 ```
 Ejemplo  Error
@@ -239,17 +238,24 @@ POST `/shop`
 Json entrada 
 ```json
 {
-    "shopId": "1",
     "locationId": "E3",
     "country": "España",
     "city": "Santiago",
     "address":"Av Buenos Aires"
 }
 ```
-
 Salida
 ```
 Status: 201 Created 
+```
+```json
+{
+    "shopId": 1,
+    "locationId": "E3",
+    "country": "España",
+    "city": "Santiago",
+    "address":"Av Buenos Aires"
+}
 ```
 **Ejemplo error**
 ```
@@ -259,7 +265,7 @@ Json Respuesta
 
 ```json
 {
-    "message": "El campo denominación no existe"
+    "message": "That locationId alredy exists"
 }
 ```
 #### Añadir un producto a la tienda 
