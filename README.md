@@ -118,7 +118,6 @@ HTTP/1.1 409 Conflict
 
 ```json
   "message": "That product alredy exists"
-
 ```
 
 #### Borrar un producto
