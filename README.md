@@ -449,7 +449,7 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "The field doesn´t exist"
+    "message": "LocationId cannot be empty"
 }
 ```
 #### Actualizar el precio del producto
@@ -480,7 +480,7 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "The field doesn´t exist"
+    "message": "Price cannot be empty"
 }
 ```
 #### Listado con filtros de tiendas 
