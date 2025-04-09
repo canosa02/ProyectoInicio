@@ -92,7 +92,13 @@ public class ProductController {
             filteredProducts.removeIf(p -> !p.getName().toLowerCase().contains(name.toLowerCase()));
         }
 
-        return filteredProducts;
+        if (filteredProducts.isEmpty()){
+            return Collections.emptyList();
+
+        }else{
+            return filteredProducts;
+        }
+
     }
 
 
