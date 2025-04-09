@@ -116,6 +116,7 @@ Json Respuesta
 ```
 HTTP/1.1 409 Conflict
 ```
+
 ```json
   "message": "That product alredy exists"
 ```
@@ -289,6 +290,13 @@ Respuesta
 ```
 HTTP/1.1 200 OK
 ```
+```json
+{
+    "productId" : 1,
+    "locationId": "E3",
+    "price": 10.5
+}
+```
 **Ejemplo  Error**
 ```
 HTTP/1.1 409 Bad Request
@@ -334,6 +342,17 @@ Salida:
 ```
 HTTP/1.1 200 OK
 ```
+
+```json
+{
+    "shopId": 5,
+    "locationId": "C9",
+    "country": "Colombia",
+    "city": "A Coruña",
+    "address": "Los Mallos, 12"
+}
+```
+
 Ejemplo  Error
 Salida
 ```
