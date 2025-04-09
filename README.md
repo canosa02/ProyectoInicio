@@ -450,8 +450,7 @@ Json respuesta
         "locationId": 1,
         "country": "España",
         "city": "Coruña",
-        "address": "Av. Finisterre",
-        "Number of products": 30
+        "address": "Av. Finisterre"
     },
     
     {
@@ -459,8 +458,7 @@ Json respuesta
         "locationId": 1,
         "country": "España",
         "city": "Santiago",
-        "address": "Av Orense",
-        "Number of products": 20
+        "address": "Av Orense"
     }
 ]
 ```
