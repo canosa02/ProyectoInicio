@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class LocationModel implements Serializable {
 
-    private String locationId;
     private String country;
     private String city;
     private String address;
@@ -12,15 +11,10 @@ public class LocationModel implements Serializable {
     public LocationModel() {
     }
 
-    public LocationModel(String locationId, String country, String adress, String city) {
-        this.locationId = locationId;
+    public LocationModel(String country, String adress, String city) {
         this.country = country;
         this.address = adress;
         this.city = city;
-    }
-
-    public String getLocationId() {
-        return locationId;
     }
 
     public String getCountry() {
@@ -33,10 +27,6 @@ public class LocationModel implements Serializable {
 
     public String getAddress() {
         return address;
-    }
-
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
     }
 
     public void setAddress(String address) {
@@ -54,7 +44,6 @@ public class LocationModel implements Serializable {
     @Override
     public String toString() {
         return "LocationModel{" +
-                "locationId='" + locationId + '\'' +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", address='" + address + '\'' +

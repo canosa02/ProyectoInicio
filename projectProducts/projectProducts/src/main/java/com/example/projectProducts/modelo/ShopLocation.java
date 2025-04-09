@@ -1,11 +1,8 @@
 package com.example.projectProducts.modelo;
 
-import java.math.BigDecimal;
-
 public class ShopLocation {
     private static int contador= 1;
     private int shopId;
-    private String locationId;
     private String country;
     private String city;
     private String address;
@@ -13,9 +10,8 @@ public class ShopLocation {
     public ShopLocation() {
     }
 
-    public ShopLocation(String locationId, String country, String city, String address) {
+    public ShopLocation(String country, String city, String address) {
         this.shopId = contador++;
-        this.locationId = locationId;
         this.country = country;
         this.city = city;
         this.address = address;
@@ -31,14 +27,6 @@ public class ShopLocation {
 
     public void setShopId(int shopId) {
         this.shopId = shopId;
-    }
-
-    public String getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
     }
 
     public String getCountry() {

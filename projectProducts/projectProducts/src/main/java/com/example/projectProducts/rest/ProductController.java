@@ -57,7 +57,7 @@ public class ProductController {
                 ));
             }
         }
-        return Collections.emptyList();
+        return Collections.emptyList(); //debería devolver 404
     }
 
     @GetMapping("/products/filter")
@@ -110,7 +110,7 @@ public class ProductController {
 
         ProductModel newProduct = new ProductModel();
         newProduct.setProductId(ProductModel.getNextId());
-        newProduct.setName(productNameDTO.getName());
+        newProduct.setName(productNameDTO.getName()); //hay que poner límite al name
         products.add(newProduct);
 
         return ResponseEntity.ok(newProduct);

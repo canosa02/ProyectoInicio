@@ -1,7 +1,6 @@
 package com.example.projectProducts.modelo;
 
 public class ShopAddDTO {
-    private String locationId;
     private String country;
     private String city;
     private String address;
@@ -9,19 +8,10 @@ public class ShopAddDTO {
     public ShopAddDTO() {
     }
 
-    public ShopAddDTO(String locationId, String country, String city, String address) {
-        this.locationId = locationId;
+    public ShopAddDTO(String country, String city, String address) {
         this.country = country;
         this.city = city;
         this.address = address;
-    }
-
-    public String getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
     }
 
     public String getCountry() {

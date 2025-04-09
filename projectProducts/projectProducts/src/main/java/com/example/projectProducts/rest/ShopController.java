@@ -21,9 +21,9 @@ public class ShopController {
 
     public ShopController() {
 
-        shopLocations.add(new ShopLocation("E2", "España", "A Coruña", "Los Mallos, 10"));
-        shopLocations.add(new ShopLocation("A2", "Argentina", "Buenos Aires", "Dirección inventada"));
-        shopLocations.add(new ShopLocation("E3", "España", "Santiago", "Av. Toledo"));
+        shopLocations.add(new ShopLocation("España", "A Coruña", "Los Mallos, 10"));
+        shopLocations.add(new ShopLocation("Argentina", "Buenos Aires", "Dirección inventada"));
+        shopLocations.add(new ShopLocation("España", "Santiago", "Av. Toledo"));
 
         productPrices.add(new ProductPriceModel(new BigDecimal("25.50"), "E2", 1));
         productPrices.add(new ProductPriceModel(new BigDecimal("25.50"), "A2", 2));
@@ -58,9 +58,6 @@ public class ShopController {
         ShopLocation newShop = new ShopLocation();
 
         for (ShopLocation shop : shopLocations) {
-            if (shop.getLocationId().equals(newShopDTO.getLocationId())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("That locationId alredy exists");
-            }
 //           Comprobación para que la calle no exista dos veces,para ello se comprueba que sea en la misma ciudad y país.
 
             if (shop.getCountry().equalsIgnoreCase(newShopDTO.getCountry()) && shop.getCity().equalsIgnoreCase(newShopDTO.getCity()) && shop.getAddress().equalsIgnoreCase(newShopDTO.getAddress())) {
@@ -68,7 +65,6 @@ public class ShopController {
             }
         }
         newShop.setShopId(ShopLocation.getNextId());
-        newShop.setLocationId(newShopDTO.getLocationId());
         newShop.setCountry(newShopDTO.getCountry());
         newShop.setCity(newShopDTO.getCity());
         newShop.setAddress(newShopDTO.getAddress());
@@ -92,18 +88,11 @@ public class ShopController {
 
     @GetMapping("/shop/filter")
     public List<ShopLocation> getShopLocationWithFilters(
-            @RequestParam(required = false) String locationId,
             @RequestParam(required = false) String country,
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String address) {
 
         List<ShopLocation> shops = new ArrayList<>(shopLocations);
-
-
-        if (locationId != null) {
-            shops.removeIf(shop -> !shop.getLocationId().equals(locationId));
-
-        }
 
         if (country != null) {
             shops.removeIf(shop -> !shop.getCountry().toLowerCase().contains(country.toLowerCase()));
@@ -126,11 +115,10 @@ public class ShopController {
 
             if (currentShop.getShopId() == shopId) {
 
-                if (updateShopDTO.getLocationId() == null || updateShopDTO.getCountry() == null ||
+                if ( updateShopDTO.getCountry() == null ||
                         updateShopDTO.getCity() == null || updateShopDTO.getAddress() == null) {
                     return ResponseEntity.badRequest().body("The fields cannot be empty");
                 }
-                currentShop.setLocationId(updateShopDTO.getLocationId());
                 currentShop.setCountry(updateShopDTO.getCountry());
                 currentShop.setCity(updateShopDTO.getCity());
                 currentShop.setAddress(updateShopDTO.getAddress());
@@ -157,10 +145,6 @@ public class ShopController {
         }
 
         // Validar los campos del DTO
-        if (updateShopDTO.getLocationId() != null && updateShopDTO.getLocationId().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("LocationId cannot be empty");
-        }
-
         if (updateShopDTO.getCountry() != null && updateShopDTO.getCountry().trim().isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Country cannot be empty");
         }
@@ -174,9 +158,6 @@ public class ShopController {
         }
 
         // Actualizar solo los campos no nulos
-        if (updateShopDTO.getLocationId() != null) {
-            shopLocation.setLocationId(updateShopDTO.getLocationId());
-        }
         if (updateShopDTO.getCountry() != null) {
             shopLocation.setCountry(updateShopDTO.getCountry());
         }
@@ -194,35 +175,28 @@ public class ShopController {
 
     @PostMapping("/shop/addProduct/{productId}")
     public ResponseEntity<Object> addProductShop(@PathVariable int productId, @RequestBody AddProductShopDTO product) {
-        String locationId = product.getLocationId();
         BigDecimal price = product.getPrice();
         boolean found = false;
-        if (locationId == null || price == null) {
+        if (price == null) {
             return ResponseEntity.badRequest().build();
         }
 
-        if (productId <= 0) {
-            return ResponseEntity.badRequest().body("LocationId is empty");
-        }
-        if (locationId.trim().isEmpty()) {
-            return ResponseEntity.badRequest().body("LocationId is empty");
-        }
         if (price.compareTo(BigDecimal.ZERO) < 0) {
             return ResponseEntity.badRequest().body("The price cannot be negative");
         }
-
 
         for (ProductPriceModel productsList : productPrices) {
             if (productId == productsList.getProductId()) {
                 found = true;
             }
         }
+
         if (!found) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product does not exist");
         }
 
         boolean alreadyAdded = productPrices.stream()
-                .anyMatch(p -> p.getProductId() == productId && p.getLocationId().equals(locationId));
+                .anyMatch(p -> p.getProductId() == productId);
 
         if (alreadyAdded) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This product already exists in that shop");
@@ -230,10 +204,9 @@ public class ShopController {
 
 
         for (ShopLocation currentShop : shopLocations) {
-            if (currentShop.getLocationId().equals(product.getLocationId())) {
+            if (currentShop.getShopId() == productId) {
                 ProductPriceModel newProduct = new ProductPriceModel();
                 newProduct.setProductId(productId);
-                newProduct.setLocationId(locationId);
                 newProduct.setPrice(price);
 
                 productPrices.add(newProduct);
@@ -262,11 +235,8 @@ public class ShopController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Shop not found");
         }
 
-        String locationId = shopLocation.getLocationId();
-
-        // Buscar el producto en la tienda con esa locationId
         for (ProductPriceModel product : productPrices) {
-            if (product.getProductId() == productId && product.getLocationId().equals(locationId)) {
+            if (product.getProductId() == productId) {
                 product.setPrice(productPricePatchDTO.getPrice());
                 return ResponseEntity.ok(product);
             }
