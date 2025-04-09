@@ -118,6 +118,7 @@ HTTP/1.1 409 Conflict
 
 ```json
   "message": "That product alredy exists"
+
 ```
 
 #### Borrar un producto
@@ -426,11 +427,13 @@ Salida:
 HTTP/1.1 200 OK
 ```
 ```json
- "shopId": 5,
-    "locationId": "E3",
-    "country": "España",
-    "city": "A Coruña",
-    "address": "Los Mallos, 12"
+{
+  "shopId": 5,
+  "locationId": "E3",
+  "country": "España",
+  "city": "A Coruña",
+  "address": "Los Mallos, 12"
+}
 ```
 Ejemplo  Error
 Salida
