@@ -213,11 +213,13 @@ Salida
 ]
 ```
 
-Ejemplo  Error
+Ejemplo  Sin productos
 ```
-HTTP/1.1 404 Not found
+HTTP/1.1 200 OK
 ```
-
+```json
+[]
+```
 ### **Tienda** ###
 #### Obtener todas las tiendas
 
