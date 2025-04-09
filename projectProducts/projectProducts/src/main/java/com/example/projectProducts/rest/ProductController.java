@@ -60,7 +60,7 @@ public class ProductController {
         return Collections.emptyList();
     }
 
-    @GetMapping("/product/filter")
+    @GetMapping("/products/filter")
     public List<ProductWithShopsDTO> getProductsWithFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) BigDecimal priceMin,
