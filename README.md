@@ -176,7 +176,7 @@ GET /products/filter?=
 
 Ejemplo busqueda: 
 ```
-GET /product/filter?name=agua&priceMin=9
+GET /products/filter?name=agua&priceMin=9
 ```
 Salida
 ```json
