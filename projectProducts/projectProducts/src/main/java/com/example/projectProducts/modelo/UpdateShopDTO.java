@@ -2,7 +2,7 @@ package com.example.projectProducts.modelo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown = false)
+//@JsonIgnoreProperties(ignoreUnknown = false)
 public class UpdateShopDTO {
     private String locationId;
     private String country;
@@ -18,9 +18,6 @@ public class UpdateShopDTO {
         this.city = city;
         this.address = address;
     }
-
-
-
 
     public String getLocationId() {
         return locationId;

@@ -120,7 +120,7 @@ public class ShopController {
     }
 
     @PutMapping("/shop/{shopId}")
-    public ResponseEntity<Object> updateshop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO) {
+    public ResponseEntity<Object> updateShop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO) {
         for (int i = 0; i < shopLocations.size(); i++) {
             ShopLocation currentShop = shopLocations.get(i);
 
