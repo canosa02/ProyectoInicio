@@ -158,19 +158,19 @@ public class ShopController {
 
         // Validar los campos del DTO
         if (updateShopDTO.getLocationId() == null || updateShopDTO.getLocationId().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("LocationId field doesn't exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("LocationId haven't been found");
         }
 
         if (updateShopDTO.getCountry() == null || updateShopDTO.getCountry().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Country field doesn't exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Country haven't been found");
         }
 
         if (updateShopDTO.getCity() == null || updateShopDTO.getCity().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("City field doesn't exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("City haven't been found");
         }
 
         if (updateShopDTO.getAddress() == null || updateShopDTO.getAddress().trim().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Address field doesn't exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Address haven't been found");
         }
 
         // Actualizar solo los campos no nulos
