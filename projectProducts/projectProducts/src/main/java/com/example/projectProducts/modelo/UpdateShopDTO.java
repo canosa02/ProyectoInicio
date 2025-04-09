@@ -1,5 +1,8 @@
 package com.example.projectProducts.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = false)
 public class UpdateShopDTO {
     private String locationId;
     private String country;
