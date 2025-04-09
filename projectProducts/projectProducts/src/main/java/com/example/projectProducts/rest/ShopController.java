@@ -137,27 +137,54 @@ public class ShopController {
 
     }
 
-    @PatchMapping("/shop/{shopId}") //no se como meter un badRequest aquí
-    public ResponseEntity<String> partialUpdateShop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO){
-        for(ShopLocation shop : shopLocations) {
-            if (shop.getShopId() == shopId){
-                if (updateShopDTO.getLocationId() != null){
-                    shop.setLocationId(updateShopDTO.getLocationId());
-                }
-                if (updateShopDTO.getCountry() != null){
-                    shop.setCountry(updateShopDTO.getCountry());
-                }
-                if (updateShopDTO.getCity() != null){
-                    shop.setCity(updateShopDTO.getCity());
-                }
-                if (updateShopDTO.getAddress() != null){
-                    shop.setAddress(updateShopDTO.getAddress());
-                }
-                return ResponseEntity.ok().build();
+    @PatchMapping("/shop/{shopId}")
+    public ResponseEntity<Object> partialUpdateShop(@PathVariable int shopId, @RequestBody UpdateShopDTO updateShopDTO) {
+        ShopLocation shopLocation = null;
+        for (ShopLocation shop : shopLocations) {
+            if (shop.getShopId() == shopId) {
+                shopLocation = shop;
+                break;
             }
         }
-        return ResponseEntity.status(404).build();
+
+        if (shopLocation == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        // Validar los campos del DTO
+        if (updateShopDTO.getLocationId() != null && updateShopDTO.getLocationId().trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("LocationId cannot be empty");
+        }
+
+        if (updateShopDTO.getCountry() != null && updateShopDTO.getCountry().trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Country cannot be empty");
+        }
+
+        if (updateShopDTO.getCity() != null && updateShopDTO.getCity().trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("City cannot be empty");
+        }
+
+        if (updateShopDTO.getAddress() != null && updateShopDTO.getAddress().trim().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Address cannot be empty");
+        }
+
+        // Actualizar solo los campos no nulos
+        if (updateShopDTO.getLocationId() != null) {
+            shopLocation.setLocationId(updateShopDTO.getLocationId());
+        }
+        if (updateShopDTO.getCountry() != null) {
+            shopLocation.setCountry(updateShopDTO.getCountry());
+        }
+        if (updateShopDTO.getCity() != null) {
+            shopLocation.setCity(updateShopDTO.getCity());
+        }
+        if (updateShopDTO.getAddress() != null) {
+            shopLocation.setAddress(updateShopDTO.getAddress());
+        }
+
+        return ResponseEntity.ok(shopLocation);
     }
+
 
 
     @PostMapping("/shop/addProduct/{productId}")
