@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -36,15 +37,19 @@ public class ShopController {
     }
 
     @GetMapping("/shop/{shopId}")
-    public ResponseEntity<ShopLocation> getShopLocation(@PathVariable int shopId) {
+    public List<Object> getShopLocation(@PathVariable int shopId) {
+        List<ShopLocation> foundShops = new ArrayList<>();
+
         for (ShopLocation shopLocation : shopLocations) {
             if (shopLocation.getShopId() == shopId) {
-                return ResponseEntity.ok(shopLocation);
+                foundShops.add(shopLocation);
+                return Collections.singletonList(foundShops);  // Devuelve la tienda encontrada en una lista
             }
         }
 
-        return ResponseEntity.notFound().build();
+        return Collections.emptyList();  // Devuelve una lista vacía si no se encuentra la tienda
     }
+
 
 
     @PostMapping("/shop")

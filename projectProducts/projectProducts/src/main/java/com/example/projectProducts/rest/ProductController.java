@@ -4,6 +4,7 @@ import com.example.projectProducts.modelo.ProductModel;
 import com.example.projectProducts.modelo.ProductNameDTO;
 import com.example.projectProducts.modelo.ProductWithShopsDTO;
 import com.example.projectProducts.modelo.ShopInfoDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,6 @@ public class ProductController {
 
     @GetMapping("/product/{productId}")
     public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
-
         for (ProductModel productModel : products) {
             if (Integer.valueOf(productModel.getProductId()).equals(productId)) {
                 return List.of(new ProductWithShopsDTO(
@@ -99,9 +99,8 @@ public class ProductController {
 
     @PostMapping("/product")
     public ResponseEntity<Object> addProduct(@RequestBody ProductNameDTO productNameDTO) {
-        String error = "That field does not exist";
         if (productNameDTO.getName() == null) {
-            return ResponseEntity.badRequest().body(error);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("That field does not exist");
         }
 
         ProductModel newProduct = new ProductModel();
@@ -125,12 +124,11 @@ public class ProductController {
 
     @PutMapping("/product/{productId}")
     public ResponseEntity<Object> updateProducts(@PathVariable int productId, @RequestBody ProductNameDTO productNameDTO) {
-       String error = "That field does not exist";
         for (int i = 0; i < products.size(); i++) {
             ProductModel currentProduct = products.get(i);
             if (currentProduct.getProductId() == productId) {
                 if (productNameDTO.getName() == null) {
-                    return ResponseEntity.badRequest().body(error);
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body("That field does not exist");
                 }
                 currentProduct.setName(productNameDTO.getName());
                 return ResponseEntity.ok(currentProduct);
