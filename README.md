@@ -113,11 +113,11 @@ Json Respuesta
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 409 Conflict
+HTTP/1.1 400 Conflict
 ```
 
 ```json
-  "message": "That product alredy exists"
+  "message": "The field doesn`t exist"
 
 ```
 
