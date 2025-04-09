@@ -26,7 +26,7 @@ public class ShopController {
 
         productPrices.add(new ProductPriceModel(new BigDecimal("25.50"), "E2", 1));
         productPrices.add(new ProductPriceModel(new BigDecimal("25.50"), "A2", 2));
-        productPrices.add(new ProductPriceModel(new BigDecimal("15.00"), "E3",3));
+        productPrices.add(new ProductPriceModel(new BigDecimal("15.00"), "E3", 3));
     }
 
 
@@ -36,10 +36,10 @@ public class ShopController {
     }
 
     @GetMapping("/shop/{shopId}")
-    public ResponseEntity<ShopLocation>  getShopLocation(@PathVariable int shopId) {
+    public ResponseEntity<ShopLocation> getShopLocation(@PathVariable int shopId) {
         for (ShopLocation shopLocation : shopLocations) {
             if (shopLocation.getShopId() == shopId) {
-                return  ResponseEntity.ok(shopLocation);
+                return ResponseEntity.ok(shopLocation);
             }
         }
 
@@ -139,7 +139,7 @@ public class ShopController {
 
 
     @PostMapping("/shop/addProduct/{productId}")
-    public ResponseEntity<Object> addProductShop(@PathVariable int productId,@RequestBody ProductPriceModelDTO product) {
+    public ResponseEntity<Object> addProductShop(@PathVariable int productId, @RequestBody AddProductShopDTO product) {
         String locationId = product.getLocationId();
         BigDecimal price = product.getPrice();
         boolean found = false;
@@ -158,12 +158,12 @@ public class ShopController {
         }
 
 
-        for(ProductPriceModel productsList : productPrices ){
-            if(productId == productsList.getProductId()){
-                found=true;
+        for (ProductPriceModel productsList : productPrices) {
+            if (productId == productsList.getProductId()) {
+                found = true;
             }
         }
-        if(!found){
+        if (!found) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product does not exist");
         }
 
@@ -173,7 +173,6 @@ public class ShopController {
         if (alreadyAdded) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This product already exists in that shop");
         }
-
 
 
         for (ShopLocation currentShop : shopLocations) {
@@ -193,8 +192,34 @@ public class ShopController {
 
     }
 
+    @PatchMapping("/shop/{shopId}/product/{productId}")
+    public ResponseEntity<Object> updateProductPrice(@PathVariable int shopId, @PathVariable int productId, @RequestBody ProductPricePatchDTO productPricePatchDTO) {
 
+        if (productPricePatchDTO.getPrice() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Price cannot be empty");
+        }
 
+        ShopLocation shopLocation = shopLocations.stream()
+                .filter(shop -> shop.getShopId() == shopId)
+                .findFirst()
+                .orElse(null);
+
+        if (shopLocation == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Shop not found");
+        }
+
+        String locationId = shopLocation.getLocationId();
+
+        // Buscar el producto en la tienda con esa locationId
+        for (ProductPriceModel product : productPrices) {
+            if (product.getProductId() == productId && product.getLocationId().equals(locationId)) {
+                product.setPrice(productPricePatchDTO.getPrice());
+                return ResponseEntity.ok(product);
+            }
+        }
+
+        return ResponseEntity.notFound().build();
+    }
 
 }
 
