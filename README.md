@@ -107,9 +107,8 @@ Json Respuesta
 ```json
 
     {
-    "productId": 5,
-    "locationId": "E2",
-    "price": 22.5
+    "productId":1,
+    "name": "Pizza con piña"
 }
 ```
 **Ejemplo  Error**
@@ -149,6 +148,13 @@ Json entrada
 Respuesta:
 ```
 HTTP/1.1 200 OK
+```
+```json
+
+    {
+    "productId":1,
+    "name": "Pizza con piña"
+}
 ```
 **Ejemplo  Error**
 ```
@@ -286,7 +292,7 @@ Json entrada
 ```
 Salida
 ```
-Status: 202 OK 
+Status: 200 OK 
 ```
 ```json
 {
@@ -299,7 +305,7 @@ Status: 202 OK
 ```
 **Ejemplo error**
 ```
-HTTP/1.1 409 Bad Request
+HTTP/1.1 409 Conflict
 ```
 Json Respuesta
 
@@ -334,7 +340,7 @@ HTTP/1.1 200 OK
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 409 Bad Request
+HTTP/1.1 409 Conflict
 ```
 Json Salida 
 ```json
