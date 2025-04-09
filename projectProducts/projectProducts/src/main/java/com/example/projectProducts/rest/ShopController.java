@@ -2,6 +2,7 @@ package com.example.projectProducts.rest;
 
 
 import com.example.projectProducts.modelo.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,10 +48,20 @@ public class ShopController {
 
 
     @PostMapping("/shop")
-    public ShopLocation addShop(@RequestBody ShopAddDTO newShopDTO) {
+    public ResponseEntity<Object> addShop(@RequestBody ShopAddDTO newShopDTO) {
 
         ShopLocation newShop = new ShopLocation();
 
+        for (ShopLocation shop : shopLocations) {
+            if (shop.getLocationId().equals(newShopDTO.getLocationId())) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("That locationId alredy exists");
+            }
+//           Comprobación para que la calle no exista dos veces,para ello se comprueba que sea en la misma ciudad y país.
+
+            if (shop.getCountry().equalsIgnoreCase(newShopDTO.getCountry()) && shop.getCity().equalsIgnoreCase(newShopDTO.getCity()) && shop.getAddress().equalsIgnoreCase(newShopDTO.getAddress())) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("That address alredy exists");
+            }
+        }
         newShop.setShopId(ShopLocation.getNextId());
         newShop.setLocationId(newShopDTO.getLocationId());
         newShop.setCountry(newShopDTO.getCountry());
@@ -58,7 +69,8 @@ public class ShopController {
         newShop.setAddress(newShopDTO.getAddress());
 
         shopLocations.add(newShop);
-        return newShop;
+
+        return ResponseEntity.ok(newShop);
     }
 
     @DeleteMapping("/shop/{shopId}")
@@ -148,9 +160,11 @@ public class ShopController {
 
         for(ProductPriceModel productsList : productPrices ){
             if(productId == productsList.getProductId()){
-                return ResponseEntity.badRequest().body("The product alredy exists");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("That product alredy exists");
+
             }
         }
+
         for (ShopLocation currentShop : shopLocations) {
             if (currentShop.getLocationId().equals(product.getLocationId())) {
                 ProductPriceModel newProduct = new ProductPriceModel();
