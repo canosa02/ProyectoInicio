@@ -107,9 +107,8 @@ Json Respuesta
 ```json
 
     {
-    "productId": 5,
-    "locationId": "E2",
-    "price": 22.5
+    "productId":1,
+    "name": "Pizza con piña"
 }
 ```
 **Ejemplo  Error**
@@ -149,6 +148,13 @@ Json entrada
 Respuesta:
 ```
 HTTP/1.1 200 OK
+```
+```json
+
+    {
+    "productId":1,
+    "name": "Pizza con piña"
+}
 ```
 **Ejemplo  Error**
 ```
@@ -212,7 +218,38 @@ HTTP/1.1 404 Not found
 ```
 
 ### **Tienda** ###
+#### Obtener todas las tiendas
 
+```
+http
+GET /shops
+```
+Ejemplo salida
+```json
+[
+    {
+        "shopId": 1,
+        "locationId": "E2",
+        "country": "España",
+        "city": "A Coruña",
+        "address": "Los Mallos, 10"
+    },
+    {
+        "shopId": 2,
+        "locationId": "A2",
+        "country": "Argentina",
+        "city": "Buenos Aires",
+        "address": "Dirección inventada"
+    },
+    {
+        "shopId": 3,
+        "locationId": "E3",
+        "country": "España",
+        "city": "Santiago",
+        "address": "Av. Toledo"
+    }
+]
+```
 #### Obtener una tienda por id
 
 ```
@@ -229,9 +266,13 @@ Ejemplo salida
     "address": "Av. Finisterre"
 }
 ```
-Ejemplo  Error
+Ejemplo si no encuentra tiendas
 ```
-HTTP/1.1 404 Not found
+HTTP/1.1 200 OK
+```
+
+```json
+[]
 ```
 #### Crear una tienda
 
@@ -251,7 +292,7 @@ Json entrada
 ```
 Salida
 ```
-Status: 202 OK 
+Status: 200 OK 
 ```
 ```json
 {
@@ -264,7 +305,7 @@ Status: 202 OK
 ```
 **Ejemplo error**
 ```
-HTTP/1.1 409 Bad Request
+HTTP/1.1 409 Conflict
 ```
 Json Respuesta
 
@@ -299,7 +340,7 @@ HTTP/1.1 200 OK
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 409 Bad Request
+HTTP/1.1 409 Conflict
 ```
 Json Salida 
 ```json
@@ -385,7 +426,11 @@ Salida:
 HTTP/1.1 200 OK
 ```
 ```json
-
+ "shopId": 5,
+    "locationId": "E3",
+    "country": "España",
+    "city": "A Coruña",
+    "address": "Los Mallos, 12"
 ```
 Ejemplo  Error
 Salida
@@ -440,7 +485,7 @@ GET /shop/filter?=
 ```
 Ejemplo
 ```
-Get /shop/filter?country=España&products_min=10
+GET /shop/filter?country=España&products_min=10
 ```
 Json respuesta
 ```json
@@ -450,8 +495,7 @@ Json respuesta
         "locationId": 1,
         "country": "España",
         "city": "Coruña",
-        "address": "Av. Finisterre",
-        "Number of products": 30
+        "address": "Av. Finisterre"
     },
     
     {
@@ -459,8 +503,7 @@ Json respuesta
         "locationId": 1,
         "country": "España",
         "city": "Santiago",
-        "address": "Av Orense",
-        "Number of products": 20
+        "address": "Av Orense"
     }
 ]
 ```
