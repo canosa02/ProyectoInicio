@@ -139,7 +139,7 @@ public class ShopController {
 
 
     @PostMapping("/shop/addProduct/{productId}")
-    public ResponseEntity<String> addProductShop(@PathVariable int productId,@RequestBody ProductPriceModelDTO product) {
+    public ResponseEntity<Object> addProductShop(@PathVariable int productId,@RequestBody ProductPriceModelDTO product) {
         String locationId = product.getLocationId();
         BigDecimal price = product.getPrice();
 
@@ -174,11 +174,11 @@ public class ShopController {
 
                 productPrices.add(newProduct);
 
-                return ResponseEntity.ok().build();
+                return ResponseEntity.ok(newProduct);
             }
         }
 
-        return ResponseEntity.badRequest().body("Lasdfasdf");
+        return ResponseEntity.notFound().build();
 
     }
 
