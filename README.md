@@ -433,7 +433,7 @@ HTTP/1.1 200 OK
   "shopId": 5,
   "locationId": "E3",
   "country": "España",
-  "city": "A Coruña",
+  "city": "Santiago",
   "address": "Los Mallos, 12"
 }
 ```
