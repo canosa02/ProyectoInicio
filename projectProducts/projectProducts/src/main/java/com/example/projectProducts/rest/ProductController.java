@@ -20,8 +20,7 @@ public class ProductController {
 
     private List<ProductModel> products = new ArrayList<>();
     private List<ShopInfoDTO> shopInfoDTOS = new ArrayList<>();
-    private List<ProductNameDTO> productsUpdate = new ArrayList<>();
-    private List<ProductWithShopsDTO> productWithShopsDTOS = new ArrayList<>();
+
 
     public ProductController() {
         products.add(new ProductModel("Pizza con piña"));
