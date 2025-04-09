@@ -158,7 +158,7 @@ Json Respuesta
 
 ```json
 {
-    "message": "El campo nombre no existe"
+    "message": "The field doesn`t exist"
 }
 ```
 #### Filtro de productos
@@ -251,7 +251,7 @@ Json entrada
 ```
 Salida
 ```
-Status: 201 Created 
+Status: 202 OK 
 ```
 ```json
 {
@@ -365,7 +365,7 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "El campo calle no existe"
+    "message": "The field doesn´t exist"
 }
 ```
 #### Actualizar parcialmente la tienda 
@@ -384,6 +384,9 @@ Salida:
 ```
 HTTP/1.1 200 OK
 ```
+```json
+
+```
 Ejemplo  Error
 Salida
 ```
@@ -396,7 +399,7 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "El campo id_ubicacion no existe"
+    "message": "The field doesn´t exist"
 }
 ```
 #### Actualizar el precio del producto
@@ -427,7 +430,7 @@ HTTP/1.1 400 Bad request
 Json salida 
 ```json
 {
-    "message": "El campo coste no existe"
+    "message": "The field doesn´t exist"
 }
 ```
 #### Listado con filtros de tiendas 
