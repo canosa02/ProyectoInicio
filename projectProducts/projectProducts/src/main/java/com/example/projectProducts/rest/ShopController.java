@@ -17,7 +17,7 @@ import java.util.List;
 public class ShopController {
 
     private List<ShopLocationDTO> shopLocationDTOS = new ArrayList<>();
-    private List<ProductPriceModelDTO> productPriceModelDTOS = new ArrayList<>();
+    private List<ProductPriceDTO> productPriceDTOS = new ArrayList<>();
 
 
     public ShopController() {
@@ -26,9 +26,9 @@ public class ShopController {
         shopLocationDTOS.add(new ShopLocationDTO("Argentina", "Buenos Aires", "Dirección inventada"));
         shopLocationDTOS.add(new ShopLocationDTO("España", "Santiago", "Av. Toledo"));
 
-        productPriceModelDTOS.add(new ProductPriceModelDTO(1, new BigDecimal("25.50")));
-        productPriceModelDTOS.add(new ProductPriceModelDTO(2, new BigDecimal("25.50")));
-        productPriceModelDTOS.add(new ProductPriceModelDTO(3, new BigDecimal("15.00")));
+        productPriceDTOS.add(new ProductPriceDTO(1, new BigDecimal("25.50")));
+        productPriceDTOS.add(new ProductPriceDTO(2, new BigDecimal("25.50")));
+        productPriceDTOS.add(new ProductPriceDTO(3, new BigDecimal("15.00")));
     }
 
 
@@ -79,7 +79,7 @@ public class ShopController {
 
 
     @PostMapping("/shop/{shopId}/addProduct/{productId}")
-    public ResponseEntity<ProductPriceModelDTO> addProductShop(@PathVariable Integer productId,@PathVariable Integer shopId, @RequestBody AddProductShopDTO product) {
+    public ResponseEntity<ProductPriceDTO> addProductShop(@PathVariable Integer productId, @PathVariable Integer shopId, @RequestBody AddProductShopDTO product) {
         BigDecimal price = product.getPrice();
 
 
@@ -88,7 +88,7 @@ public class ShopController {
         }
 
         boolean productexists = false;
-        for (ProductPriceModelDTO productsList : productPriceModelDTOS) {
+        for (ProductPriceDTO productsList : productPriceDTOS) {
             if (productsList.getProductId().equals(productId)) {
                 productexists = true;
                 break;
@@ -110,7 +110,7 @@ public class ShopController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        for (ProductPriceModelDTO existingProduct : productPriceModelDTOS) {
+        for (ProductPriceDTO existingProduct : productPriceDTOS) {
             if (productId.equals(existingProduct.getProductId()) && shopId.equals(existingProduct.getShopId())) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
@@ -118,12 +118,12 @@ public class ShopController {
 
         for (ShopLocationDTO currentShop : shopLocationDTOS) {
             if (currentShop.getShopId().equals(shopId)) {
-                ProductPriceModelDTO newProduct = new ProductPriceModelDTO();
+                ProductPriceDTO newProduct = new ProductPriceDTO();
                 newProduct.setProductId(productId);
                 newProduct.setShopId(shopId);
                 newProduct.setPrice(price);
 
-                productPriceModelDTOS.add(newProduct);
+                productPriceDTOS.add(newProduct);
 
                 return ResponseEntity.ok(newProduct);
             }
@@ -214,7 +214,7 @@ public class ShopController {
 
 
     @PatchMapping("/shop/{shopId}/product/{productId}")
-    public ResponseEntity<ProductPriceModelDTO> updateProductPrice(@PathVariable Integer shopId, @PathVariable Integer productId, @RequestBody ProductPricePatchDTO productPricePatchDTO) {
+    public ResponseEntity<ProductPriceDTO> updateProductPrice(@PathVariable Integer shopId, @PathVariable Integer productId, @RequestBody ProductPricePatchDTO productPricePatchDTO) {
 
         if (productPricePatchDTO.getPrice() == null) {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Price cannot be empty");
@@ -231,7 +231,7 @@ public class ShopController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        for (ProductPriceModelDTO product : productPriceModelDTOS) {
+        for (ProductPriceDTO product : productPriceDTOS) {
             if (product.getProductId().equals(productId)) {
                 product.setPrice(productPricePatchDTO.getPrice());
                 return ResponseEntity.ok(product);

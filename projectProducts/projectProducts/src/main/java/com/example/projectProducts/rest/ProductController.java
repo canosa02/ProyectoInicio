@@ -1,7 +1,6 @@
 package com.example.projectProducts.rest;
 
-import com.example.projectProducts.modelo.DTO.ProductModelDTO;
-import com.example.projectProducts.modelo.ProductModel;
+import com.example.projectProducts.modelo.DTO.ProductDTO;
 import com.example.projectProducts.modelo.DTO.ProductNameDTO;
 import com.example.projectProducts.modelo.DTO.ProductWithShopsDTO;
 import com.example.projectProducts.modelo.DTO.ShopInfoDTO;
@@ -20,15 +19,15 @@ import java.util.List;
 
 public class ProductController {
 
-    private List<ProductModelDTO> products = new ArrayList<>();
+    private List<ProductDTO> products = new ArrayList<>();
     private List<ShopInfoDTO> shopInfoDTOS = new ArrayList<>();
 
 
     public ProductController() {
-        products.add(new ProductModelDTO("Pizza con piña"));
-        products.add(new ProductModelDTO("Agua"));
-        products.add(new ProductModelDTO("Agua con gas"));
-        products.add(new ProductModelDTO("Naranjas"));
+        products.add(new ProductDTO("Pizza con piña"));
+        products.add(new ProductDTO("Agua"));
+        products.add(new ProductDTO("Agua con gas"));
+        products.add(new ProductDTO("Naranjas"));
 
         shopInfoDTOS.add(new ShopInfoDTO(1, new BigDecimal("10.5")));
         shopInfoDTOS.add(new ShopInfoDTO(2, new BigDecimal("9.5")));
@@ -40,7 +39,7 @@ public class ProductController {
     public List<ProductWithShopsDTO> getProductsWithShops() {
         List<ProductWithShopsDTO> producto = new ArrayList<>();
 
-        for (ProductModelDTO productModel : products) {
+        for (ProductDTO productModel : products) {
             producto.add(new ProductWithShopsDTO(productModel.getProductId(), productModel.getName(), shopInfoDTOS));
         }
 
@@ -50,7 +49,7 @@ public class ProductController {
 // Hola hola prueba
     @GetMapping("/product/{productId}")
     public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
-        for (ProductModelDTO productModel : products) {
+        for (ProductDTO productModel : products) {
             if (productModel.getProductId().equals(productId)) {
                 return List.of(new ProductWithShopsDTO(
                         productModel.getProductId(),
@@ -64,14 +63,14 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    public ResponseEntity<ProductModelDTO> addProduct(@RequestBody ProductNameDTO productNameDTO) {
+    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductNameDTO productNameDTO) {
         if (productNameDTO.getName() == null) {
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("That field does not exist");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        ProductModelDTO newProduct = new ProductModelDTO();
-        newProduct.setProductId(ProductModelDTO.getNextId());
+        ProductDTO newProduct = new ProductDTO();
+        newProduct.setProductId(ProductDTO.getNextId());
         newProduct.setName(productNameDTO.getName()); //hay que poner límite al name
         products.add(newProduct);
 
@@ -80,7 +79,7 @@ public class ProductController {
 
 
     @DeleteMapping("/product/{productId}")
-    public ResponseEntity<ProductModelDTO> deleteProduct(@PathVariable Integer productId) {
+    public ResponseEntity<ProductDTO> deleteProduct(@PathVariable Integer productId) {
         boolean removed = products.removeIf(product -> product.getProductId().equals(productId));
 
         if (removed) {
@@ -92,9 +91,9 @@ public class ProductController {
 
 
     @PutMapping("/product/{productId}")
-    public ResponseEntity<ProductModelDTO> updateProducts(@Validated @PathVariable Integer productId, @RequestBody ProductNameDTO productNameDTO) {
+    public ResponseEntity<ProductDTO> updateProducts(@Validated @PathVariable Integer productId, @RequestBody ProductNameDTO productNameDTO) {
         for (int i = 0; i < products.size(); i++) {
-            ProductModelDTO currentProduct = products.get(i);
+            ProductDTO currentProduct = products.get(i);
             if (currentProduct.getProductId().equals(productId)) {
                 if (productNameDTO.getName() == null) {
 //                    return ResponseEntity.status(HttpStatus.CONFLICT).body("That field does not exist");
@@ -119,7 +118,7 @@ public class ProductController {
         List<ProductWithShopsDTO> filteredProducts = new ArrayList<>();
 
 
-        for (ProductModelDTO product : products) {
+        for (ProductDTO product : products) {
             List<ShopInfoDTO> filteredShops = new ArrayList<>(shopInfoDTOS);
 
             if (priceMin != null) {

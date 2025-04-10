@@ -3,21 +3,21 @@ package com.example.projectProducts.modelo.DTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProductPriceModelDTO implements Serializable {
+public class ProductPriceDTO implements Serializable {
 
     private Integer productId;
     private Integer shopId;
     private BigDecimal price;
 
-    public ProductPriceModelDTO() {
+    public ProductPriceDTO() {
     }
 
-    public ProductPriceModelDTO(Integer productId, BigDecimal price) {
+    public ProductPriceDTO(Integer productId, BigDecimal price) {
         this.productId = productId;
         this.price = price;
     }
 
-    public ProductPriceModelDTO(Integer productId, Integer shopId, BigDecimal price) {
+    public ProductPriceDTO(Integer productId, Integer shopId, BigDecimal price) {
         this.productId = productId;
         this.shopId = shopId;
         this.price = price;

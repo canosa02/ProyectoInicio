@@ -2,16 +2,16 @@ package com.example.projectProducts.modelo.DTO;
 
 import java.io.Serializable;
 
-public class LocationModelDTO implements Serializable {
+public class LocationDTO implements Serializable {
 
     private String country;
     private String city;
     private String address;
 
-    public LocationModelDTO() {
+    public LocationDTO() {
     }
 
-    public LocationModelDTO(String country, String adress, String city) {
+    public LocationDTO(String country, String adress, String city) {
         this.country = country;
         this.address = adress;
         this.city = city;

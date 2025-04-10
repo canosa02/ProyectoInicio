@@ -1,14 +1,14 @@
 package com.example.projectProducts.modelo.DTO;
 
-public class ProductModelDTO {
+public class ProductDTO {
     private static Integer  contador = 1;
     private Integer productId;
     private String name;
 
-    public ProductModelDTO() {
+    public ProductDTO() {
     }
 
-    public ProductModelDTO( String name) {
+    public ProductDTO(String name) {
         this.productId = contador++;
         this.name = name;
     }
