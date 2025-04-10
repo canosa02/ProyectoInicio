@@ -1,4 +1,4 @@
-package com.example.projectProducts.modelo;
+package com.example.projectProducts.modelo.DTO;
 
 import java.util.List;
 

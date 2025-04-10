@@ -1,9 +1,9 @@
 package com.example.projectProducts.rest;
 
 import com.example.projectProducts.modelo.ProductModel;
-import com.example.projectProducts.modelo.ProductNameDTO;
-import com.example.projectProducts.modelo.ProductWithShopsDTO;
-import com.example.projectProducts.modelo.ShopInfoDTO;
+import com.example.projectProducts.modelo.DTO.ProductNameDTO;
+import com.example.projectProducts.modelo.DTO.ProductWithShopsDTO;
+import com.example.projectProducts.modelo.DTO.ShopInfoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

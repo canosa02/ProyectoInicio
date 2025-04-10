@@ -2,6 +2,10 @@ package com.example.projectProducts.rest;
 
 
 import com.example.projectProducts.modelo.*;
+import com.example.projectProducts.modelo.DTO.AddProductShopDTO;
+import com.example.projectProducts.modelo.DTO.ProductPricePatchDTO;
+import com.example.projectProducts.modelo.DTO.ShopAddDTO;
+import com.example.projectProducts.modelo.DTO.UpdateShopDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

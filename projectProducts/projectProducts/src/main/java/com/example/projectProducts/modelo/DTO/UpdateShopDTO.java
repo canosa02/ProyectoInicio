@@ -1,14 +1,15 @@
-package com.example.projectProducts.modelo;
+package com.example.projectProducts.modelo.DTO;
 
-public class ShopAddDTO {
+//@JsonIgnoreProperties(ignoreUnknown = false)
+public class UpdateShopDTO {
     private String country;
     private String city;
     private String address;
 
-    public ShopAddDTO() {
+    public UpdateShopDTO() {
     }
 
-    public ShopAddDTO(String country, String city, String address) {
+    public UpdateShopDTO(String country, String city, String address) {
         this.country = country;
         this.city = city;
         this.address = address;

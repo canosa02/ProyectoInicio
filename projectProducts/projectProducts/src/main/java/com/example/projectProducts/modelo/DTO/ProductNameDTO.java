@@ -1,4 +1,4 @@
-package com.example.projectProducts.modelo;
+package com.example.projectProducts.modelo.DTO;
 
 public class ProductNameDTO {
     private String name;
