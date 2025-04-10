@@ -103,7 +103,11 @@ Json entrada
 }
 ```
 
-Json Respuesta
+Respuesta
+```
+HTTP/1.1 201 Created
+```
+
 ```json
 
     {
@@ -292,7 +296,7 @@ Json entrada
 ```
 Salida
 ```
-Status: 200 OK 
+Status: 201 Created
 ```
 ```json
 {
