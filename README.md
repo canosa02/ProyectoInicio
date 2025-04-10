@@ -117,7 +117,9 @@ HTTP/1.1 400 Conflict
 ```
 
 ```json
+{
   "message": "The field doesn`t exist"
+}
 
 ```
 
@@ -152,7 +154,7 @@ HTTP/1.1 200 OK
 ```
 ```json
 
-    {
+{
     "productId":1,
     "name": "Pizza con piña y chocolate"
 }
@@ -232,21 +234,18 @@ Ejemplo salida
 [
     {
         "shopId": 1,
-        "locationId": "E2",
         "country": "España",
         "city": "A Coruña",
         "address": "Los Mallos, 10"
     },
     {
         "shopId": 2,
-        "locationId": "A2",
         "country": "Argentina",
         "city": "Buenos Aires",
         "address": "Dirección inventada"
     },
     {
         "shopId": 3,
-        "locationId": "E3",
         "country": "España",
         "city": "Santiago",
         "address": "Av. Toledo"
@@ -263,7 +262,6 @@ Ejemplo salida
 ```json
 {
     "shopId": 1,
-    "locationId": "E3",
     "country": "España",
     "city": "Coruña",
     "address": "Av. Finisterre"
@@ -287,7 +285,6 @@ POST `/shop`
 Json entrada 
 ```json
 {
-    "locationId": "E3",
     "country": "España",
     "city": "Santiago",
     "address":"Av Buenos Aires"
@@ -300,7 +297,6 @@ Status: 200 OK
 ```json
 {
     "shopId": 1,
-    "locationId": "E3",
     "country": "España",
     "city": "Santiago",
     "address":"Av Buenos Aires"
@@ -326,7 +322,6 @@ POST /shop/addProduct/{productId}
 Json entrada 
 ```json
 {
-    "locationId": "E3",
     "price": 10.5
 }
 ```
@@ -337,7 +332,6 @@ HTTP/1.1 200 OK
 ```json
 {
     "productId" : 1,
-    "locationId": "E3",
     "price": 10.5
 }
 ```
@@ -376,7 +370,6 @@ PUT `/shop/{shopId}
 Json entrada 
 ```json
 {
-    "locationId": "E3",
     "country": "España",
     "city":" A Coruña",
     "address": "Av de Arteixo 6"
@@ -390,7 +383,6 @@ HTTP/1.1 200 OK
 ```json
 {
     "shopId": 5,
-    "locationId": "C9",
     "country": "Colombia",
     "city": "A Coruña",
     "address": "Los Mallos, 12"
@@ -420,7 +412,6 @@ PATCH /shop/{shopId}
 Json entrada 
 ```json
 {
-    "locationId": "E3",
     "city":" Santiago"
 }
 ```
@@ -431,7 +422,6 @@ HTTP/1.1 200 OK
 ```json
 {
   "shopId": 5,
-  "locationId": "E3",
   "country": "España",
   "city": "Santiago",
   "address": "Los Mallos, 12"
@@ -497,7 +487,6 @@ Json respuesta
 [
     {
         "shopId": 4,
-        "locationId": 1,
         "country": "España",
         "city": "Coruña",
         "address": "Av. Finisterre"
@@ -505,7 +494,6 @@ Json respuesta
     
     {
         "shopId": 6,
-        "locationId": 1,
         "country": "España",
         "city": "Santiago",
         "address": "Av Orense"

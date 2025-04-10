@@ -1,5 +1,8 @@
 package com.example.projectProducts.modelo.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 public class ShopLocationDTO {
 
     private static int contador= 1;
@@ -13,6 +16,13 @@ public class ShopLocationDTO {
 
     public ShopLocationDTO(String country, String city, String address) {
         this.shopId = contador++;
+        this.country = country;
+        this.city = city;
+        this.address = address;
+    }
+
+    public ShopLocationDTO(int shopId, String country, String city, String address) {
+        this.shopId = shopId;
         this.country = country;
         this.city = city;
         this.address = address;
