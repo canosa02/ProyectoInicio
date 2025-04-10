@@ -101,6 +101,7 @@ public class ProductController {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
                 } else if (productNameDTO.getName().isEmpty()) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                    //
                 }
                 currentProduct.setName(productNameDTO.getName());
                 return ResponseEntity.ok(currentProduct);
