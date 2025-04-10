@@ -47,7 +47,7 @@ public class ProductController {
         return producto;
     }
 
-
+// Hola hola prueba
     @GetMapping("/product/{productId}")
     public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
         for (ProductModelDTO productModel : products) {
