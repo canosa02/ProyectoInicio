@@ -51,7 +51,7 @@ public class ProductController {
     @GetMapping("/product/{productId}")
     public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
         for (ProductModelDTO productModel : products) {
-            if (Integer.valueOf(productModel.getProductId()).equals(productId)) {
+            if (productModel.getProductId().equals(productId)) {
                 return List.of(new ProductWithShopsDTO(
                         productModel.getProductId(),
                         productModel.getName(),
@@ -80,8 +80,8 @@ public class ProductController {
 
 
     @DeleteMapping("/product/{productId}")
-    public ResponseEntity<ProductModelDTO> deleteProduct(@PathVariable int productId) {
-        boolean removed = products.removeIf(product -> product.getProductId() == productId);
+    public ResponseEntity<ProductModelDTO> deleteProduct(@PathVariable Integer productId) {
+        boolean removed = products.removeIf(product -> product.getProductId().equals(productId));
 
         if (removed) {
             return ResponseEntity.ok().build();
@@ -92,10 +92,10 @@ public class ProductController {
 
 
     @PutMapping("/product/{productId}")
-    public ResponseEntity<ProductModelDTO> updateProducts(@Validated @PathVariable int productId, @RequestBody ProductNameDTO productNameDTO) {
+    public ResponseEntity<ProductModelDTO> updateProducts(@Validated @PathVariable Integer productId, @RequestBody ProductNameDTO productNameDTO) {
         for (int i = 0; i < products.size(); i++) {
             ProductModelDTO currentProduct = products.get(i);
-            if (currentProduct.getProductId() == productId) {
+            if (currentProduct.getProductId().equals(productId)) {
                 if (productNameDTO.getName() == null) {
 //                    return ResponseEntity.status(HttpStatus.CONFLICT).body("That field does not exist");
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

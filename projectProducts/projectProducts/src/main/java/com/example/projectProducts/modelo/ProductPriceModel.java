@@ -5,20 +5,20 @@ import java.math.BigDecimal;
 
 public class ProductPriceModel implements  Serializable {
 
-    private  int  productId;
+    private  Integer  productId;
     private String locationId;
     private BigDecimal price;
 
     public ProductPriceModel() {
     }
 
-    public ProductPriceModel(BigDecimal price, String locationId, int productId) {
+    public ProductPriceModel(BigDecimal price, String locationId, Integer productId) {
         this.price = price;
         this.locationId = locationId;
         this.productId = productId;
     }
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
@@ -38,7 +38,7 @@ public class ProductPriceModel implements  Serializable {
         this.price = price;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

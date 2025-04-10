@@ -10,7 +10,7 @@ public class ProductPricePatchDTO implements Serializable {
     public ProductPricePatchDTO() {
     }
 
-    public ProductPricePatchDTO(BigDecimal price, String locationId, int productId) {
+    public ProductPricePatchDTO(BigDecimal price, String locationId, Integer productId) {
         this.price = price;
 
     }

@@ -3,15 +3,15 @@ package com.example.projectProducts.modelo.DTO;
 import java.math.BigDecimal;
 
 public class ShopInfoDTO {
-    private int shopId;
+    private Integer shopId;
     private BigDecimal price;
 
-    public ShopInfoDTO(int shopId, BigDecimal price) {
+    public ShopInfoDTO(Integer shopId, BigDecimal price) {
         this.shopId = shopId;
         this.price = price;
     }
 
-    public int getShopId() {
+    public Integer getShopId() {
         return shopId;
     }
 
@@ -19,7 +19,7 @@ public class ShopInfoDTO {
         return price;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
 

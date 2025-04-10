@@ -5,18 +5,25 @@ import java.math.BigDecimal;
 
 public class ProductPriceModelDTO implements Serializable {
 
-    private  int  productId;
+    private Integer productId;
+    private Integer shopId;
     private BigDecimal price;
 
     public ProductPriceModelDTO() {
     }
 
-    public ProductPriceModelDTO(int productId, BigDecimal price) {
+    public ProductPriceModelDTO(Integer productId, BigDecimal price) {
         this.productId = productId;
         this.price = price;
     }
 
-    public int getProductId() {
+    public ProductPriceModelDTO(Integer productId, Integer shopId, BigDecimal price) {
+        this.productId = productId;
+        this.shopId = shopId;
+        this.price = price;
+    }
+
+    public Integer getProductId() {
         return productId;
     }
 
@@ -29,8 +36,16 @@ public class ProductPriceModelDTO implements Serializable {
         this.price = price;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
     }
 
     @Override

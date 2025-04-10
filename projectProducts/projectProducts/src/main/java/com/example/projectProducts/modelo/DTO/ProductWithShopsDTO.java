@@ -3,17 +3,17 @@ package com.example.projectProducts.modelo.DTO;
 import java.util.List;
 
 public class ProductWithShopsDTO {
-    private int productId;
+    private Integer productId;
     private String name;
     private List<ShopInfoDTO> shop;
 
-    public ProductWithShopsDTO(int productId, String name, List<ShopInfoDTO> shop) {
+    public ProductWithShopsDTO(Integer productId, String name, List<ShopInfoDTO> shop) {
         this.productId = productId;
         this.name = name;
         this.shop = shop;
     }
 
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
@@ -25,7 +25,7 @@ public class ProductWithShopsDTO {
         return shop;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

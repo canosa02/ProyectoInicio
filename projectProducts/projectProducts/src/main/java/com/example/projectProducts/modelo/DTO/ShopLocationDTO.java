@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class ShopLocationDTO {
 
-    private static int contador= 1;
-    private int shopId;
+    private static Integer contador= 1;
+    private Integer shopId;
     private String country;
     private String city;
     private String address;
@@ -21,22 +21,22 @@ public class ShopLocationDTO {
         this.address = address;
     }
 
-    public ShopLocationDTO(int shopId, String country, String city, String address) {
+    public ShopLocationDTO(Integer shopId, String country, String city, String address) {
         this.shopId = shopId;
         this.country = country;
         this.city = city;
         this.address = address;
     }
 
-    public static int getNextId(){
+    public static Integer getNextId(){
         return contador++;
     }
 
-    public int getShopId() {
+    public Integer getShopId() {
         return shopId;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
 

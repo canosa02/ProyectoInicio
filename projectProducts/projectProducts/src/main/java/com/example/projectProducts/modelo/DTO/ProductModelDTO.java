@@ -1,8 +1,8 @@
 package com.example.projectProducts.modelo.DTO;
 
 public class ProductModelDTO {
-    private static int  contador = 1;
-    private int productId;
+    private static Integer  contador = 1;
+    private Integer productId;
     private String name;
 
     public ProductModelDTO() {
@@ -13,14 +13,15 @@ public class ProductModelDTO {
         this.name = name;
     }
 
-    public static int getNextId(){
+    public static Integer getNextId(){
         return contador++;
     }
-    public int getProductId() {
+
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 

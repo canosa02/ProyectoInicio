@@ -1,8 +1,8 @@
 package com.example.projectProducts.modelo;
 
 public class ShopLocation {
-    private static int contador= 1;
-    private int shopId;
+    private static Integer contador= 1;
+    private Integer shopId;
     private String country;
     private String city;
     private String address;
@@ -17,15 +17,15 @@ public class ShopLocation {
         this.address = address;
     }
 
-    public static int getNextId(){
+    public static Integer getNextId(){
         return contador++;
     }
 
-    public int getShopId() {
+    public Integer getShopId() {
         return shopId;
     }
 
-    public void setShopId(int shopId) {
+    public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
 

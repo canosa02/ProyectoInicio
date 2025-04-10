@@ -22,7 +22,7 @@ CREATE TABLE shop (
 );
 
 CREATE TABLE productPrice(
-    productId int not null,
+    productId Integer not null,
     locationId varchar(5) not null,
     price bigdecimal not null,
     primary key (productId, locationId),
