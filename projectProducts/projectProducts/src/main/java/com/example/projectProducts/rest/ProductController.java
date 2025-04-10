@@ -74,7 +74,7 @@ public class ProductController {
         newProduct.setName(productNameDTO.getName()); //hay que poner límite al name
         products.add(newProduct);
 
-        return ResponseEntity.ok(newProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
     }
 
 
