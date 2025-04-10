@@ -26,9 +26,9 @@ public class ShopController {
         shopLocationDTOS.add(new ShopLocationDTO("Argentina", "Buenos Aires", "Dirección inventada"));
         shopLocationDTOS.add(new ShopLocationDTO("España", "Santiago", "Av. Toledo"));
 
-        productPriceDTOS.add(new ProductPriceDTO(1, new BigDecimal("25.50")));
-        productPriceDTOS.add(new ProductPriceDTO(2, new BigDecimal("25.50")));
-        productPriceDTOS.add(new ProductPriceDTO(3, new BigDecimal("15.00")));
+        productPriceDTOS.add(new ProductPriceDTO(1,1, new BigDecimal("25.50")));
+        productPriceDTOS.add(new ProductPriceDTO(2,2, new BigDecimal("25.50")));
+        productPriceDTOS.add(new ProductPriceDTO(3,3, new BigDecimal("15.00")));
     }
 
 
@@ -216,30 +216,34 @@ public class ShopController {
     @PatchMapping("/shop/{shopId}/product/{productId}")
     public ResponseEntity<ProductPriceDTO> updateProductPrice(@PathVariable Integer shopId, @PathVariable Integer productId, @RequestBody ProductPricePatchDTO productPricePatchDTO) {
 
+        // Verificar si el precio está presente en el DTO
         if (productPricePatchDTO.getPrice() == null) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Price cannot be empty");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
+        // Buscar la tienda por shopId
         ShopLocationDTO shopLocation = shopLocationDTOS.stream()
                 .filter(shop -> shop.getShopId().equals(shopId))
                 .findFirst()
                 .orElse(null);
 
         if (shopLocation == null) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Shop not found");
+            // Si no se encuentra la tienda, retornar NOT_FOUND
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
+        // Buscar el producto y actualizar su precio
         for (ProductPriceDTO product : productPriceDTOS) {
-            if (product.getProductId().equals(productId)) {
-                product.setPrice(productPricePatchDTO.getPrice());
-                return ResponseEntity.ok(product);
+            if (product.getProductId().equals(productId) && product.getShopId().equals(shopId)) {
+                product.setPrice(productPricePatchDTO.getPrice());  // Actualizar el precio
+                return ResponseEntity.ok(product);  // Retornar el producto actualizado
             }
         }
 
-        return ResponseEntity.notFound().build();
+        // Si no se encuentra el producto, retornar NOT_FOUND
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
+
 
 
     @GetMapping("/shop/filter")
