@@ -113,7 +113,7 @@ Json Respuesta
 ```
 **Ejemplo  Error**
 ```
-HTTP/1.1 400 Conflict
+HTTP/1.1 400 Bad Request
 ```
 
 ```json
