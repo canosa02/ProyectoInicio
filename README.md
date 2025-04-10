@@ -306,18 +306,11 @@ Status: 200 OK
 ```
 HTTP/1.1 409 Conflict
 ```
-Json Respuesta
-
-```json
-{
-    "message": "That locationId alredy exists"
-}
-```
 #### Añadir un producto a la tienda 
 
 ```
 http
-POST /shop/addProduct/{productId}
+POST /shop/{shopId}/addProduct/{productId}
 ```
 Json entrada 
 ```json
@@ -331,6 +324,7 @@ HTTP/1.1 200 OK
 ```
 ```json
 {
+    "shopId": 1
     "productId" : 1,
     "price": 10.5
 }
@@ -435,12 +429,6 @@ HTTP/1.1 404 Not found
 Ejemplo error
 ```
 HTTP/1.1 400 Bad request
-```
-Json salida 
-```json
-{
-    "message": "LocationId cannot be empty"
-}
 ```
 #### Actualizar el precio del producto
 ```
