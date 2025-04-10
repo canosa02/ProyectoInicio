@@ -324,7 +324,7 @@ HTTP/1.1 200 OK
 ```
 ```json
 {
-    "shopId": 1
+    "shopId": 1,
     "productId" : 1,
     "price": 10.5
 }
