@@ -6,15 +6,13 @@ import java.math.BigDecimal;
 public class ProductPriceModel implements  Serializable {
 
     private  Integer  productId;
-    private String locationId;
     private BigDecimal price;
 
     public ProductPriceModel() {
     }
 
-    public ProductPriceModel(BigDecimal price, String locationId, Integer productId) {
+    public ProductPriceModel(BigDecimal price,Integer productId) {
         this.price = price;
-        this.locationId = locationId;
         this.productId = productId;
     }
 
@@ -22,17 +20,12 @@ public class ProductPriceModel implements  Serializable {
         return productId;
     }
 
-    public String getLocationId() {
-        return locationId;
-    }
+
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
-    }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
@@ -46,7 +39,6 @@ public class ProductPriceModel implements  Serializable {
     public String toString() {
         return "ProductPriceModel{" +
                 "productId=" + productId +
-                ", locationId='" + locationId + '\'' +
                 ", price=" + price +
                 '}';
     }
