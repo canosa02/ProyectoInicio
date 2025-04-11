@@ -4,6 +4,12 @@ import com.example.projectProducts.modelo.dto.ProductDTO;
 import com.example.projectProducts.modelo.dto.ProductNameDTO;
 import com.example.projectProducts.modelo.dto.ProductWithShopsDTO;
 import com.example.projectProducts.modelo.dto.ShopInfoDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -46,7 +52,7 @@ public class ProductController {
         return producto;
     }
 
-// Hola hola prueba
+
     @GetMapping("/product/{productId}")
     public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
         for (ProductDTO productModel : products) {
@@ -62,6 +68,20 @@ public class ProductController {
     }
 
 
+    @Operation(summary = "Create a new product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid input",
+                    content = @Content(mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    name = "Bad Request",
+                                    value = "{ \"error\": \"Missing required field: name\" }"
+                            )
+                    )
+            )
+    })
     @PostMapping("/product")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductNameDTO productNameDTO) {
         if (productNameDTO.getName() == null) {
