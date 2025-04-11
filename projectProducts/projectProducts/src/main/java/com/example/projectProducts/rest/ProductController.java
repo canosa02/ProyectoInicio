@@ -70,13 +70,16 @@ public class ProductController {
 
     @Operation(summary = "Create a new product")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Created"),
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Created",
+                    content = @Content(mediaType = "application/json")
+            ),
             @ApiResponse(
                     responseCode = "400",
                     description = "Invalid input",
                     content = @Content(mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "Bad Request",
                                     value = "{ \"error\": \"Missing required field: name\" }"
                             )
                     )

@@ -2,6 +2,11 @@ package com.example.projectProducts.rest;
 
 
 import com.example.projectProducts.modelo.dto.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -54,7 +59,40 @@ public class ShopController {
         return Collections.emptyList();  // Devuelve una lista vacía si no se encuentra la tienda
     }
 
-
+    @Operation(summary = "Create a shop")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Created",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    name = "Shop Created",
+                                    value = "{ \"shopId\": 4, \"country\": \"España\", \"city\": \"Coruña\", \"address\": \"Os Mallos 10\" }"
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Missing or invalid fields",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{ \"error\": \"Missing required field: city\" }"
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "Shop already exists",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{ \"error\": \"Shop already exists at this address in this city and country\" }"
+                            )
+                    )
+            )
+    })
     @PostMapping("/shop")
     public ResponseEntity<ShopLocationDTO> addShop(@RequestBody ShopAddDTO newShopDTO) {
 
