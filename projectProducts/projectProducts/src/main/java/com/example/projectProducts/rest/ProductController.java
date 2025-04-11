@@ -52,7 +52,6 @@ public class ProductController {
         return producto;
     }
 
-
     @GetMapping("/product/{productId}")
     public List<ProductWithShopsDTO> getProductsWithId(@PathVariable Integer productId) {
         for (ProductDTO productModel : products) {
@@ -68,7 +67,6 @@ public class ProductController {
     }
 
 
-    @Operation(summary = "Create a new product")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -100,7 +98,6 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
     }
 
-
     @DeleteMapping("/product/{productId}")
     public ResponseEntity<ProductDTO> deleteProduct(@PathVariable Integer productId) {
         boolean removed = products.removeIf(product -> product.getProductId().equals(productId));
@@ -111,7 +108,6 @@ public class ProductController {
             return ResponseEntity.status(404).build();
         }
     }
-
 
     @PutMapping("/product/{productId}")
     public ResponseEntity<ProductDTO> updateProducts(@Validated @PathVariable Integer productId, @RequestBody ProductNameDTO productNameDTO) {

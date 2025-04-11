@@ -2,7 +2,6 @@ package com.example.projectProducts.rest;
 
 
 import com.example.projectProducts.modelo.dto.*;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -36,7 +35,6 @@ public class ShopController {
         productPriceDTOS.add(new ProductPriceDTO(3,3, new BigDecimal("15.00")));
     }
 
-
     @GetMapping("/shops")
     public List<ShopLocationDTO> getAllShops() {
         return shopLocationDTOS;
@@ -59,7 +57,7 @@ public class ShopController {
         return Collections.emptyList();  // Devuelve una lista vacía si no se encuentra la tienda
     }
 
-    @Operation(summary = "Create a shop")
+
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "201",
@@ -67,7 +65,6 @@ public class ShopController {
                     content = @Content(
                             mediaType = "application/json",
                             examples = @ExampleObject(
-                                    name = "Shop Created",
                                     value = "{ \"shopId\": 4, \"country\": \"España\", \"city\": \"Coruña\", \"address\": \"Os Mallos 10\" }"
                             )
                     )
@@ -116,6 +113,49 @@ public class ShopController {
     }
 
 
+
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Product added to shop",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{ \"productId\": 1, \"shopId\": 2, \"price\": 15.99 }"
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid price provided",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{ \"error\": \"Price must be greater than or equal to 0\" }"
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Shop or product not found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{ \"error\": \"Product or shop not found\" }"
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "409",
+                    description = "Product already exists in shop",
+                    content = @Content(
+                            mediaType = "application/json",
+                            examples = @ExampleObject(
+                                    value = "{ \"error\": \"This product is already registered in this shop\" }"
+                            )
+                    )
+            )
+    })
     @PostMapping("/shop/{shopId}/addProduct/{productId}")
     public ResponseEntity<ProductPriceDTO> addProductShop(@PathVariable Integer productId, @PathVariable Integer shopId, @RequestBody AddProductShopDTO product) {
         BigDecimal price = product.getPrice();
@@ -205,7 +245,6 @@ public class ShopController {
 
     }
 
-
     @PatchMapping("/shop/{shopId}")
     public ResponseEntity<ShopLocationDTO> partialUpdateShop(@PathVariable Integer shopId, @RequestBody UpdateShopDTO updateShopDTO) {
         ShopLocationDTO shopLocation = null;
@@ -250,7 +289,6 @@ public class ShopController {
         return ResponseEntity.ok(shopLocation);
     }
 
-
     @PatchMapping("/shop/{shopId}/product/{productId}")
     public ResponseEntity<ProductPriceDTO> updateProductPrice(@PathVariable Integer shopId, @PathVariable Integer productId, @RequestBody ProductPricePatchDTO productPricePatchDTO) {
 
@@ -281,7 +319,6 @@ public class ShopController {
         // Si no se encuentra el producto, retornar NOT_FOUND
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
 
 
     @GetMapping("/shop/filter")
