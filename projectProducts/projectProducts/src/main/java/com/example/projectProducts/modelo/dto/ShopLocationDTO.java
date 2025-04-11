@@ -1,6 +1,4 @@
-package com.example.projectProducts.modelo.DTO;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package com.example.projectProducts.modelo.dto;
 
 
 public class ShopLocationDTO {

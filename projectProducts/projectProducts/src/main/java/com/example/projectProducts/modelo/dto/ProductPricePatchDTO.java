@@ -1,19 +1,19 @@
-package com.example.projectProducts.modelo.DTO;
+package com.example.projectProducts.modelo.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class AddProductShopDTO implements  Serializable {
+public class ProductPricePatchDTO implements Serializable {
 
     private BigDecimal price;
 
-    public AddProductShopDTO() {
+    public ProductPricePatchDTO() {
     }
 
-    public AddProductShopDTO(BigDecimal price, String locationId, int productId) {
+    public ProductPricePatchDTO(BigDecimal price, String locationId, Integer productId) {
         this.price = price;
-    }
 
+    }
 
 
     public BigDecimal getPrice() {

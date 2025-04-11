@@ -1,4 +1,4 @@
-package com.example.projectProducts.modelo.DTO;
+package com.example.projectProducts.modelo.dto;
 
 public class ProductDTO {
     private static Integer  contador = 1;

@@ -1,7 +1,7 @@
 package com.example.projectProducts.rest;
 
 
-import com.example.projectProducts.modelo.DTO.*;
+import com.example.projectProducts.modelo.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

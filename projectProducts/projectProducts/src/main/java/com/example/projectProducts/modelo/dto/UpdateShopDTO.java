@@ -1,4 +1,4 @@
-package com.example.projectProducts.modelo.DTO;
+package com.example.projectProducts.modelo.dto;
 
 //@JsonIgnoreProperties(ignoreUnknown = false)
 public class UpdateShopDTO {
